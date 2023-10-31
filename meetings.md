@@ -23,7 +23,20 @@ for that requirement.>
 <see example on the last date>
 <use date format YYYY-MM-DD at HH:MM>
 
-### 2023-10-15 at 10:30
-<meeting template would go here>
-<only fill in template once you had the meeting>
+### 2023-10-29 at 15:00
+- Anthony, Charles, Thy
+- Created the requirements and wrote the use cases for each one.
+- Anthony worked on use cases 2,7,8,9
+- Charles worked on use cases 3,9,10,12
+- Thy worked on use cases 1, 11, 13
+- Completed a majority of use cases.
+
+### 2023-10-31 at 12:00 
+- Anthony, Charles, Thy
+- Drew out the web pages required for each use case.
+- Collectively drew the pages and revised requirements.
+- Anthony will work on all requirements combined into #7, and the new requirement #8.
+- Thy will work on requirement #11.
+- Charles will work on requirement #6, revise #12
+- The group should be almost done with milestone 1. Still needed: weekly meeting schedule, name, to commit requirements.
 
