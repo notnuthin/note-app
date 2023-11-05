@@ -1,26 +1,25 @@
-## <remove all of the example text and notes in < > such as this one>
-
 ## Functional Requirements
-1. requirement <should be 1 sentence that describes requirement>
-2. requirement
-3. requirement
-4. requirement
-5. requirement
-6. requirement
-7. requirement
-8. requirement
-9. requirement
-10. requirement
-11. requirement
-12. requirement
-13. requirement
-14. requirement
+1.Sign Up (Thy)
+2.Edit User Profile (Anthony)
+3.Delete Account (Charles)
+4.Login (CJ)
+5.Logout (CJ)
+6.Reset password(Charles)
+7.Ability to Customize font sizes and text style (italic,underline,etc.) font color and highlight (Anthony)
+8.Create a Note / Folder(Anthony)
+9.Move notes into different categories/folders (Anthony)
+10.Add a password protected folder (Charles)
+11.Advance search items with regular expressions or filters by categories (Thy)
+12.Favorite and unfavorite notes(Charles)
+13.Save notes as, pdf, etc (Thy)
+14.Delete notes  (CJ)
+
 
 <using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
 
 ## Non-functional Requirements
-1. non-functional
-2. non-functional
+1.Multilingual support
+2.Only expected to work on Google Chrome
 
 <each of the 14 requirements will have a use case associated with it>
 ## Use Cases <Add name of who will write (this specific requirement) and implement (in subsequent milestones) the use case below>
