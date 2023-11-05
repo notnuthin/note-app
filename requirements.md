@@ -18,8 +18,8 @@
 <using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
 
 ## Non-functional Requirements
-1.Multilingual support
-2.Only expected to work on Google Chrome
+1. Multilingual support
+2. Only expected to work on Google Chrome
 
 <each of the 14 requirements will have a use case associated with it>
 ## Use Cases <Add name of who will write (this specific requirement) and implement (in subsequent milestones) the use case below>
