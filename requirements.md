@@ -56,7 +56,7 @@ describe multiple issues that may arise and their outcomes>
 - The user’s profile is updated or it stays the same. 
 - **Alternate Sequence:**
 1. The user does not make any changes to their profile and clicks “Save Changes”
-a. The System displays a “No changes were made” message
+- a.The System displays a “No changes were made” message
 
 7. Ability to Customize font sizes and text style (italic,underline,etc.) font color and highlight  (Anthony)
 - **Pre-condition:** THe user is on one of their note pages
@@ -68,7 +68,7 @@ a. The System displays a “No changes were made” message
 - Any text typed from that point is the correct size, style, color, and has the correct highlight
 - **Alternate Sequence:**
 1. The user has highlighted a section of text and adjusts the font size/style/color/highlight after
-a. The font size/style/color/highlight applies to the section of text and to the text typed after that section.
+- a. The font size/style/color/highlight applies to the section of text and to the text typed after that section.
 
 8. Create a Note / Folder (Anthony)
 - **Pre-condition:** The user is on their homepage.
@@ -82,7 +82,7 @@ a. The font size/style/color/highlight applies to the section of text and to the
 -  A new Note/Folder is created with the name the user specified and is available to the user on the homepage. 
 - **Alternate Sequence:**
 3. The user does not enter a name and clicks the create button
-a. The Note/Folder is still created, but has the name "untitled"
+- a. The Note/Folder is still created, but has the name "untitled"
 
 9. Ability to move notes into different folder (Anthony)
 - **Pre-condition:** The user is on their homepage
@@ -96,7 +96,7 @@ a. The Note/Folder is still created, but has the name "untitled"
 - The folder is in the correct location and the user is brought to the default homepage.
 - **Alternate Sequence:**
 1. The user clicks the exit button at any point in the process.
-a. The user is brought back to the hompage
+- a. The user is brought back to the hompage
 
 
 
