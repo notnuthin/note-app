@@ -16,3 +16,9 @@
 - Charles will work on requirement #6, revise #12
 - The group should be almost done with milestone 1. Still needed: weekly meeting schedule, name, to commit requirements.
 
+### 2023-11-05 at 15:00
+- Anthony, Charles, CJ, Thy
+- Reviewed the assignment and worked on updating the markdown files. (25 minutes)
+- We individually committed our work on the use cases (30 minutes)
+- Team members need to commit their use case descriptions
+- Milestone 1 should basically be completed.
