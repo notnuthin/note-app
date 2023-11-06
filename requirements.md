@@ -135,7 +135,17 @@ Alternate Sequence:
 1. The result page contains notes that fit the user’s search criteria
 - **Alternative Sequence:**
 3. The user did not enter anything to the search bar or customize their filter.
-- a.The system will not redirect the user to the result page 
+- a. The system will not redirect the user to the result page
+13. Save notes as txt, docx or pdf (Thy)
+- **Pre-condition:** The user is open the note they want to save
+- **Trigger:** The user click the “save as” button
+- **Primary Sequence:**
+1. The system displays a drop down menu which the user can choose between txt, docx or pdf.
+2. The user chooses which type of file they want to save the note as.
+3. The system converts the note to the type the user chose and is downloaded onto the user’s computer.
+-**Primary Postconditions:** 
+1. The note is converted and downloaded to the user’s computer. 
+
 
 
 
