@@ -85,8 +85,42 @@ Alternate Sequence:
 1. The user does not make any changes to their profile and clicks “Save Changes”
 - a.The System displays a “No changes were made” message
 
+3. Delete User Profile (Charles)
+- **Pre-condition:** The user has a profile and is logged in.
+- **Trigger:** The user clicks the “delete profile” button in the profile page.
+- **Primary Sequence:**
+1. The user opens the profile page and clicks the “delete profile” button.
+2. The system prompts the user with an “Are you sure?” prompt with two buttons, “Delete” or “Cancel”.
+3. The user clicks the “Delete” button.
+4. The system will ask the user for their password for verification.
+- **Primary Postconditions:**
+- The system will delete the record of the user’s profile that is saved on the database if the “Delete” button is pressed and the user is verified.
+- **Alternate Sequence:**
+1. The user clicks the “Cancel” button and the profile record is not deleted.
+2. The password is not verified so the profile record is not deleted. (Bonus if we can lock the account for security)
+
+4. (CJ)
+5. (CJ)
+
+6. Reset Password (Charles)
+- **Pre-condition:** User must have an account.
+- **Trigger:** The user clicks on the “Reset password” on the login or profile page.
+- **Primary Sequence:**
+1. The system will automatically send a verification code to the user’s logged email address.
+2. A new window will open prompting the user to enter the code.
+- a. The user will have the option to resend the code by the “Resend code” button.
+3. System will remove the logged password on the database.
+4. Once the user types the code a new window will open prompting the user to type a new password and repeat the process.
+5. The new password will be logged onto the database.
+- **Primary Postconditions:**
+- The user’s password is changed.
+- **Alternate Sequence:**
+1. User enters the wrong code for verification.
+- a. User is prompted to enter a code that is re-sent.
+- b. If the user still types in the wrong code, the system will lock the account.
+
 7. Ability to Customize font sizes and text style (italic,underline,etc.) font color and highlight  (Anthony)
-- **Pre-condition:** THe user is on one of their note pages
+- **Pre-condition:** The user is on one of their note pages
 - **Trigger:** The user clicks the text size number, any of the text style buttons (bold, italic, underline), the text color button, or the text highlight button.
 - **Primary Sequence:**
 1. The user types in a different font size or adjusts the font style, color, or highlight.
@@ -124,6 +158,20 @@ Alternate Sequence:
 - **Alternate Sequence:**
 1. The user clicks the exit button at any point in the process.
 - a. The user is brought back to the hompage
+
+10. Add a password protected folder (Charles)
+- **Pre-condition:** The user needs to be logged in and verified.
+- **Trigger:** The user clicks on the password protected folder button/icon.
+- **Primary Sequence:**
+1. The system prompts the user to enter a password for the folder.
+2. System verifies this password through the database.
+- **Primary Postconditions:**
+- Users would be able to edit, add, or delete notes after the database verifies the password.
+- **Alternate Sequence:**
+1. The user logs in but does not make any changes inside the password protected folder.
+- a. The user can exit out of the folder.
+- b. The system exits out of the folder after no user activity is detected.
+  
 11. Advance search items with regular expressions or filters by categories (Thy)
 - **Pre-condition:** The user is logged into their account
 - **Trigger:** The user click on the search bar
@@ -136,6 +184,23 @@ Alternate Sequence:
 - **Alternative Sequence:**
 3. The user did not enter anything to the search bar or customize their filter.
 - a. The system will not redirect the user to the result page
+
+12. Favorite and Unfavorite Notes (Charles)
+- **Pre-condition:** The user needs to be logged in and verified.
+1. The user is on the homepage they want to favorite.
+2. The user is on the note document that they want to favorite.
+- **Trigger:**
+1. On the homepage, the user can right click on the note document and press the “Favorite” button.
+2. On the note document, there will be a “Favorite” button on the toolbar of the notes document.
+- **Primary Sequence:**
+1. “Favorite” button is pressed.
+2. The system will have a “Favorite” column on the database, taking in a boolean.
+3. If the system reads that it is “TRUE”, it will display the notes under the favorites section of the homepage.
+- a. The system reads “FALSE” nothing is added under the favorites section.
+- **Primary Postconditions:**
+1. The note document is added in the favorites section of the homepage.
+2. The note document is unadded from the favorites section of the homepage.
+  
 13. Save notes as txt, docx or pdf (Thy)
 - **Pre-condition:** The user is open the note they want to save
 - **Trigger:** The user click the “save as” button
@@ -144,7 +209,11 @@ Alternate Sequence:
 2. The user chooses which type of file they want to save the note as.
 3. The system converts the note to the type the user chose and is downloaded onto the user’s computer.
 -**Primary Postconditions:** 
-1. The note is converted and downloaded to the user’s computer. 
+1. The note is converted and downloaded to the user’s computer.
+
+14. 
+
+
 
 
 
