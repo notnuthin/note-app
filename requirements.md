@@ -44,6 +44,33 @@ describe multiple issues that may arise and their outcomes>
 3. ...
 - **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
 
+1. Sign Up (Thy)
+- **Pre-condition:** The user is on the webpage
+- **Trigger:** The user hit the sign up button
+- **Primary Sequence:**
+1. The system prompts the user to enter email address, username, password, and re-enter their password.
+2. The user enters the email address, username, password, and validating password.
+3. The system checks if the user entered the prompts correctly and sends a validation email.
+4. The user checks their email for a validation code and enters the code.
+5. The system validates the code and stores the account information on the database.
+6. The system takes the user to the profile customization page. 
+7. The system prompts the user to upload a profile picture, and enter their biography.
+8. The user uploads their profile picture, enters their biography and then clicks the save button.
+9. The system saves the profile to the database 
+10. The system take the user to their homepage
+- **Primary Postconditions:**
+1. The user account is created and stored in the database
+2. The user can log in this account anytime after the account is created
+Alternate Sequence:
+2. The user enter an invalid email address, missing any field or the passwords don’t match
+- a. Display an error message
+- b. Prompt the user to enter the information again
+4. The user enter an incorrect validation code
+- a. Display an error message
+- b. Prompt the user to enter the information again 
+	8. The user didn’t upload a profile picture or/ and enter their biography.
+- a. The system uses the default profile picture and leaves the biography blank. The system save the profile to the database
+
 2. Edit User Profile (Anthony)
 - **Pre-condition:** The user is logged in
 - **Trigger:** The user clicks the “edit profile” button in the profile page
