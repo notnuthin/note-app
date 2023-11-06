@@ -1,5 +1,5 @@
 # Easy Notes
 - Anthony Nguyen (@notnuthin) Team Lead
 - Charles Manaois (@username)
-- Name (@username)
+- Gia Thy Le (@shinychikapu)
 - Name (@username)
