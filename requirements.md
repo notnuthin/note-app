@@ -124,6 +124,18 @@ Alternate Sequence:
 - **Alternate Sequence:**
 1. The user clicks the exit button at any point in the process.
 - a. The user is brought back to the hompage
+11. Advance search items with regular expressions or filters by categories (Thy)
+- **Pre-condition:** The user is logged into their account
+- **Trigger:** The user click on the search bar
+- **Primary Sequence:**
+1. The user enters an expression into the search bar or clicks on the filter icon next to the search bar.
+2. The system displays a drop down menu if the user clicks on the filter icon.
+3. The system redirects the user to the result page after the user customize their filter or press enter after they have entered some expressions in the search bar.
+- **Primary Postconditions:**
+1. The result page contains notes that fit the user’s search criteria
+- **Alternative Sequence:**
+3. The user did not enter anything to the search bar or customize their filter.
+- a.The system will not redirect the user to the result page 
 
 
 
