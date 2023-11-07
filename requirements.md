@@ -99,10 +99,45 @@ Alternate Sequence:
 1. The user clicks the “Cancel” button and the profile record is not deleted.
 2. The password is not verified so the profile record is not deleted. (Bonus if we can lock the account for security)
 
-4. (CJ)
-5. (CJ)
+4. Login (CJ)
+5. Pre-condition: User must have previously registered an account within the system or application.
+Trigger: User's attempt to access the application or system that requires authentication
+Primary Sequence: 
+The user launches the program or system and goes to the login screen.
+The user enters their login or email address, as well as the related password, into the appropriate boxes.
+The system compares the entered username/email to the user records in the system's database.
+The system compares the supplied password to the stored password for the provided username/email.
+If the credentials entered match the stored information, the system provides the user access.
+After successful authentication, the user is granted access to the application's features or services based on their authorization level.
+Primary Postconditions: 
+The user is logged into the application upon successful authentication.
+The system logs the user's session and activities for security and auditing purposes.
+The user retains access until they log out or the session expires due to inactivity.
 
-6. Reset Password (Charles)
+Alternate Sequence: 
+If the entered username/email does not exist or the password is incorrect, the system prompts the user with an error message.
+The user may be given the option to reset the password or try logging in again.
+The user initiates the password reset process.
+The system sends a password reset link or instructions to the user's registered email address.
+
+6. Logout (CJ)
+Pre-condition: Users must be logged into the system.
+Trigger: The user's explicit action or request to log out from the application or system.
+Primary Sequence: 
+The user actively selects the "logout" or "sign out" option within the application or system.
+The system invalidates the user's current session, removing the session token or related authentication information.
+After logout, the system denies access to functionalities or areas requiring authentication.
+Some systems may display a confirmation message to verify the user's intent to log out.
+The user is directed to a logout confirmation screen or to the login page.
+Primary Postconditions: 
+The user is logged out of the system.
+Access to the application's functionalities requiring authentication is revoked.
+The user is directed to a logout confirmation screen or the login page.
+Alternate Sequence: 
+If the session times out due to inactivity, the system automatically logs out the user.
+
+
+8. Reset Password (Charles)
 - **Pre-condition:** User must have an account.
 - **Trigger:** The user clicks on the “Reset password” on the login or profile page.
 - **Primary Sequence:**
