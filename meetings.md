@@ -22,3 +22,10 @@
 - We individually committed our work on the use cases (30 minutes)
 - Team members need to commit their use case descriptions
 - Milestone 1 should basically be completed.
+
+### 2023-11-07 at 10:45
+- Anthony, Charles, CJ, Thy
+- Discussed the next steps for the project, and what we can do now without the database code. Thy set up the repo with the base files from class.(30 minutes)
+- Started to divide up roles, began working on html files, and started to learn html (30 minutes)
+- There isn't much for next time since the milestone isn't posted. We'll just do what we can.
+- Basic HTML for some webpages are done.
