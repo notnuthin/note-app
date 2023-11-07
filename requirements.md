@@ -60,7 +60,9 @@ Alternate Sequence:
 - b. Prompt the user to enter the information again 
 	8. The user didn’t upload a profile picture or/ and enter their biography.
 - a. The system uses the default profile picture and leaves the biography blank. The system save the profile to the database
+
 <br>
+
 2. Edit User Profile (Anthony)
 - **Pre-condition:** The user is logged in
 - **Trigger:** The user clicks the “edit profile” button in the profile page
@@ -74,7 +76,9 @@ Alternate Sequence:
 - **Alternate Sequence:**
 1. The user does not make any changes to their profile and clicks “Save Changes”
 - a.The System displays a “No changes were made” message
+
 <br>
+
 3. Delete User Profile (Charles)
 - **Pre-condition:** The user has a profile and is logged in.
 - **Trigger:** The user clicks the “delete profile” button in the profile page.
@@ -88,7 +92,9 @@ Alternate Sequence:
 - **Alternate Sequence:**
 1. The user clicks the “Cancel” button and the profile record is not deleted.
 2. The password is not verified so the profile record is not deleted. (Bonus if we can lock the account for security)
+
 <br>
+
 4. Login (CJ)
 5. Pre-condition: User must have previously registered an account within the system or application.
 Trigger: User's attempt to access the application or system that requires authentication
@@ -109,7 +115,9 @@ If the entered username/email does not exist or the password is incorrect, the s
 The user may be given the option to reset the password or try logging in again.
 The user initiates the password reset process.
 The system sends a password reset link or instructions to the user's registered email address.
+
 <br>
+
 6. Logout (CJ)
 Pre-condition: Users must be logged into the system.
 Trigger: The user's explicit action or request to log out from the application or system.
@@ -125,6 +133,7 @@ Access to the application's functionalities requiring authentication is revoked.
 The user is directed to a logout confirmation screen or the login page.
 Alternate Sequence: 
 If the session times out due to inactivity, the system automatically logs out the user.
+
 <br>
 
 8. Reset Password (Charles)
@@ -143,7 +152,9 @@ If the session times out due to inactivity, the system automatically logs out th
 1. User enters the wrong code for verification.
 - a. User is prompted to enter a code that is re-sent.
 - b. If the user still types in the wrong code, the system will lock the account.
+
 <br>
+
 7. Ability to Customize font sizes and text style (italic,underline,etc.) font color and highlight  (Anthony)
 - **Pre-condition:** The user is on one of their note pages
 - **Trigger:** The user clicks the text size number, any of the text style buttons (bold, italic, underline), the text color button, or the text highlight button.
@@ -155,7 +166,9 @@ If the session times out due to inactivity, the system automatically logs out th
 - **Alternate Sequence:**
 1. The user has highlighted a section of text and adjusts the font size/style/color/highlight after
 - a. The font size/style/color/highlight applies to the section of text and to the text typed after that section.
+
 <br>
+
 8. Create a Note / Folder (Anthony)
 - **Pre-condition:** The user is on their homepage.
 - **Trigger:** The user clicks the new Note/Folder button.
@@ -169,7 +182,9 @@ If the session times out due to inactivity, the system automatically logs out th
 - **Alternate Sequence:**
 3. The user does not enter a name and clicks the create button
 - a. The Note/Folder is still created, but has the name "untitled"
+
 <br>
+
 9. Ability to move notes into different folder (Anthony)
 - **Pre-condition:** The user is on their homepage
 - **Trigger:** The user right clicks one of their notes and selects the “Move to folder” option.
@@ -183,7 +198,9 @@ If the session times out due to inactivity, the system automatically logs out th
 - **Alternate Sequence:**
 1. The user clicks the exit button at any point in the process.
 - a. The user is brought back to the hompage
+
 <br>
+
 10. Add a password protected folder (Charles)
 - **Pre-condition:** The user needs to be logged in and verified.
 - **Trigger:** The user clicks on the password protected folder button/icon.
@@ -196,7 +213,9 @@ If the session times out due to inactivity, the system automatically logs out th
 1. The user logs in but does not make any changes inside the password protected folder.
 - a. The user can exit out of the folder.
 - b. The system exits out of the folder after no user activity is detected.
+
 <br>
+
 11. Advance search items with regular expressions or filters by categories (Thy)
 - **Pre-condition:** The user is logged into their account
 - **Trigger:** The user click on the search bar
@@ -209,7 +228,9 @@ If the session times out due to inactivity, the system automatically logs out th
 - **Alternative Sequence:**
 3. The user did not enter anything to the search bar or customize their filter.
 - a. The system will not redirect the user to the result page
+
 <br>
+
 12. Favorite and Unfavorite Notes (Charles)
 - **Pre-condition:** The user needs to be logged in and verified.
 1. The user is on the homepage they want to favorite.
@@ -225,7 +246,9 @@ If the session times out due to inactivity, the system automatically logs out th
 - **Primary Postconditions:**
 1. The note document is added in the favorites section of the homepage.
 2. The note document is unadded from the favorites section of the homepage.
+
 <br>  
+
 13. Save notes as txt, docx or pdf (Thy)
 - **Pre-condition:** The user is open the note they want to save
 - **Trigger:** The user click the “save as” button
@@ -235,7 +258,9 @@ If the session times out due to inactivity, the system automatically logs out th
 3. The system converts the note to the type the user chose and is downloaded onto the user’s computer.
 -**Primary Postconditions:** 
 1. The note is converted and downloaded to the user’s computer.
+
 <br>
+
 14. Delete Notes (CJ)
 Pre-condition: 
 The user must be logged into the note-taking application.
