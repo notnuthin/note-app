@@ -246,7 +246,25 @@ If the session times out due to inactivity, the system automatically logs out th
 -**Primary Postconditions:** 
 1. The note is converted and downloaded to the user’s computer.
 
-14. 
+14. Delete Notes (CJ)
+Pre-condition: 
+The user must be logged into the note-taking application.
+The user must have created or have access to the notes they intend to delete.
+Trigger: The user's explicit action or request to remove one or multiple notes from the note-taking application.
+Primary Sequence: 
+ The user navigates to the list of notes within the application.
+The user selects one or multiple notes they wish to delete by either using checkboxes or highlighting the notes.
+The user clicks on the "Delete" button or a similar action to remove the selected notes.
+The system confirms the user's intent to delete the selected notes.
+The system permanently erases the selected notes from the database or storage.
+Primary Postconditions: 
+The selected notes are permanently deleted from the application.
+The system updates the note list to reflect the removed notes.
+Confirmation of successful deletion is provided to the user.
+Alternate Sequence: 
+If the user chooses to cancel the deletion action, the system returns the user to the notes list without removing the selected notes.
+If an error occurs during the deletion process, the system informs the user of the failure to delete the notes and suggests retrying the action later.
+
 
 
 
