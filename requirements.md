@@ -17,18 +17,20 @@
 
 
 Homepage
-[](images/homepage_ui.jpg)
+![](images/homepage_ui.jpg)
 Login
-[](images/login_ui.jpg)
+![](images/login_ui.jpg)
 Note Page
-[](images/notepage_ui.jpg)
+![](images/notepage_ui.jpg)
 Profile
-[](images/profile_ui.jpg)
+![](images/profile_ui.jpg)
 Reset Password
-[](images/reset_password_ui.jpg)
+![](images/reset_password_ui.jpg)
 Sign Up
-[](images/signup_ui.jpg)
+![](images/signup_ui.jpg)
+
 <br>
+
 ## Non-functional Requirements
 1. Multilingual support
 2. Only expected to work on Google Chrome
