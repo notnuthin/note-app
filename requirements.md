@@ -8,7 +8,7 @@
 7. Edit and Save Note(Anthony)
 8. Create a Note / Folder(Anthony)
 9. Move notes into different categories/folders (Anthony)
-10. Add a password protected folder (Charles)
+10. Accessing a password protected folder (Charles)
 11. Advance search items with regular expressions or filters by categories (Thy)
 12. Opening Notes and Folders (Charles)
 13. Save notes as, pdf, etc (Thy)
@@ -53,7 +53,7 @@ Sign Up
 - **Primary Postconditions:**
 1. The user account is created and stored in the database
 2. The user can log in this account anytime after the account is created
-Alternate Sequence:
+- **Alternate Sequence:**
 2. The user enter an invalid email address, missing any field or the passwords don’t match
 - a. Display an error message
 - b. Prompt the user to enter the information again
@@ -74,7 +74,7 @@ Alternate Sequence:
 3. The system prompts the user with an “Are you sure?” message.
 4. The user clicks confirm. 
 - **Primary Postconditions:**
-- The user’s profile is updated or it stays the same. 
+- The user’s profile is updated. 
 - **Alternate Sequence:**
 1. The user does not make any changes to their profile and clicks “Save Changes”.
 - a.The System displays a “No changes were made” message.
@@ -95,7 +95,7 @@ Alternate Sequence:
 - The system will delete the record of the user’s profile that is saved on the database if the “Delete” button is pressed and the user is verified.
 - **Alternate Sequence:**
 1. The user clicks the “Cancel” button and the profile record is not deleted.
-2. The password is not verified so the profile record is not deleted. (Bonus if we can lock the account for security)
+2. The password is not verified so the profile record is not deleted. 
 
 <br>
 
@@ -181,6 +181,7 @@ Alternate Sequence:
 - **Alternate Sequence:**
 3. The user does not enter a name and clicks the create button.
 - a. The Note/Folder is still created, but has the name "untitled".
+1. If the user clicks on the icon for a password protected folder they will be prompted to enter a password along with a name.
 
 <br>
 
@@ -200,14 +201,14 @@ Alternate Sequence:
 
 <br>
 
-10. Add a password protected folder (Charles)
+10. Accessing a password protected folder (Charles)
 - **Pre-condition:** The user needs to be logged in and verified.
 - **Trigger:** The user clicks on the password protected folder button/icon.
 - **Primary Sequence:**
 1. The system prompts the user to enter a password for the folder.
 2. System verifies this password through the database.
 - **Primary Postconditions:**
-- Users would be able to edit, add, or delete notes after the database verifies the password.
+- Users would be able to edit, add, or delete notes located in the folder after the database verifies the password.
 - **Alternate Sequence:**
 1. The user logs in but does not make any changes inside the password protected folder.
 - a. The user can exit out of the folder.
@@ -223,7 +224,7 @@ Alternate Sequence:
 2. The system displays a drop down menu if the user clicks on the filter icon.
 3. The system redirects the user to the result page after the user customize their filter or press enter after they have entered some expressions in the search bar.
 - **Primary Postconditions:**
-1. The result page contains notes that fit the user’s search criteria
+1. The result page contains notes or folders that fit the user’s search criteria
 - **Alternative Sequence:**
 3. The user did not enter anything to the search bar or customize their filter.
 - a. The system will not redirect the user to the result page
