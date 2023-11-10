@@ -5,7 +5,7 @@
 4. Login (CJ)
 5. Logout (CJ)
 6. Reset password(Charles)
-7. Ability to Customize font sizes and text style (italic,underline,etc.) font color and highlight (Anthony)
+7. Edit and Save Note(Anthony)
 8. Create a Note / Folder(Anthony)
 9. Move notes into different categories/folders (Anthony)
 10. Add a password protected folder (Charles)
@@ -66,18 +66,20 @@ Alternate Sequence:
 <br>
 
 2. Edit User Profile (Anthony)
-- **Pre-condition:** The user is logged in
-- **Trigger:** The user clicks the “edit profile” button in the profile page
+- **Pre-condition:** The user is logged in.
+- **Trigger:** The user clicks the “edit profile” button in the profile page.
 - **Primary Sequence:**
-1. The user makes changes to their biography or uploads a new profile
+1. The user makes changes to their biography or uploads a new profile picture.
 2. The user clicks the “Save Changes” button.
 3. The system prompts the user with an “Are you sure?” message.
 4. The user clicks confirm. 
 - **Primary Postconditions:**
 - The user’s profile is updated or it stays the same. 
 - **Alternate Sequence:**
-1. The user does not make any changes to their profile and clicks “Save Changes”
-- a.The System displays a “No changes were made” message
+1. The user does not make any changes to their profile and clicks “Save Changes”.
+- a.The System displays a “No changes were made” message.
+3. The user clicks no on the prompt.
+- a.The System displays a “No changes were made” message.
 
 <br>
 
@@ -98,47 +100,41 @@ Alternate Sequence:
 <br>
 
 4. Login (CJ)
-5. Pre-condition: User must have previously registered an account within the system or application.
-Trigger: User's attempt to access the application or system that requires authentication
-Primary Sequence: 
-The user launches the program or system and goes to the login screen.
-The user enters their login or email address, as well as the related password, into the appropriate boxes.
-The system compares the entered username/email to the user records in the system's database.
-The system compares the supplied password to the stored password for the provided username/email.
-If the credentials entered match the stored information, the system provides the user access.
-After successful authentication, the user is granted access to the application's features or services based on their authorization level.
-Primary Postconditions: 
-The user is logged into the application upon successful authentication.
-The system logs the user's session and activities for security and auditing purposes.
-The user retains access until they log out or the session expires due to inactivity.
-
-Alternate Sequence: 
-If the entered username/email does not exist or the password is incorrect, the system prompts the user with an error message.
-The user may be given the option to reset the password or try logging in again.
-The user initiates the password reset process.
-The system sends a password reset link or instructions to the user's registered email address.
+- **Pre-condition:** User must have previously registered an account within the system or application.
+- **Trigger:** User's attempt to access the application or system that requires authentication
+- **Primary Sequence:** 
+1. The user launches the program or system and goes to the login screen.
+2. The user enters their login or email address, as well as the related password, into the appropriate boxes.
+3. The system compares the entered username/email to the user records in the system's database.
+4. The system compares the supplied password to the stored password for the provided username/email.
+5. If the credentials entered match the stored information, the system provides the user access.
+6. After successful authentication, the user is granted access to the application's features or services based on their authorization level.
+- **Primary Postconditions:** 
+- The user is logged into the application upon successful authentication.
+- The system logs the user's session and activities for security and auditing purposes.
+- The user retains access until they log out or the session expires due to inactivity.
+- **Alternate Sequence:** 
+3. If the entered username/email does not exist or the password is incorrect, the system prompts the user with an error message.
+- a. The user may be given the option to reset the password or try logging in again.
 
 <br>
 
-6. Logout (CJ)
-Pre-condition: Users must be logged into the system.
-Trigger: The user's explicit action or request to log out from the application or system.
-Primary Sequence: 
-The user actively selects the "logout" or "sign out" option within the application or system.
-The system invalidates the user's current session, removing the session token or related authentication information.
-After logout, the system denies access to functionalities or areas requiring authentication.
-Some systems may display a confirmation message to verify the user's intent to log out.
-The user is directed to a logout confirmation screen or to the login page.
-Primary Postconditions: 
-The user is logged out of the system.
-Access to the application's functionalities requiring authentication is revoked.
-The user is directed to a logout confirmation screen or the login page.
-Alternate Sequence: 
-If the session times out due to inactivity, the system automatically logs out the user.
+5. Logout (CJ)
+- **Pre-condition:** Users must be logged into the application.
+- **Trigger:** The user clicking the logout button.
+- **Primary Sequence:** 
+1. The user actively selects the "logout" or "sign out" option within the application.
+2. The system displays a confirmation message to verify the user's intent to log out.
+3. The user clicks confirm.
+4. The system invalidates the user's current session, removing the session token or related authentication information.
+6. After logout, the system redirects the user to the login page.
+- **Primary Postconditions:** 
+- The user is logged out of the system.
+- The user is directed to the login page.
 
 <br>
 
-8. Reset Password (Charles)
+6. Reset Password (Charles)
 - **Pre-condition:** User must have an account.
 - **Trigger:** The user clicks on the “Reset password” on the login or profile page.
 - **Primary Sequence:**
@@ -157,17 +153,18 @@ If the session times out due to inactivity, the system automatically logs out th
 
 <br>
 
-7. Ability to Customize font sizes and text style (italic,underline,etc.) font color and highlight  (Anthony)
-- **Pre-condition:** The user is on one of their note pages
-- **Trigger:** The user clicks the text size number, any of the text style buttons (bold, italic, underline), the text color button, or the text highlight button.
+7. Edit and Save Note(Anthony)
+- **Pre-condition:** The user is on one of their note pages.
+- **Trigger:** The user edits the text on the current note. 
 - **Primary Sequence:**
-1. The user types in a different font size or adjusts the font style, color, or highlight.
-2. The System adjusts the font size/style/color/highlight for the following text.
+1. The user edits the text contained in the note.
+2. The user clicks save.
+3. The system updates the user's note.
 - **Primary Postconditions:**
-- Any text typed from that point is the correct size, style, color, and has the correct highlight
+-  Any changes made to the contents of the note are saved.
 - **Alternate Sequence:**
-1. The user has highlighted a section of text and adjusts the font size/style/color/highlight after
-- a. The font size/style/color/highlight applies to the section of text and to the text typed after that section.
+1. The user makes changes to their note, but does not save.
+- a. The changes are not saved to the note.
 
 <br>
 
@@ -178,28 +175,28 @@ If the session times out due to inactivity, the system automatically logs out th
 1. The user clicks the new Note/Folder button.
 2. The system prompts the user to enter a name.
 3. The user enters a name and clicks the create button.
-4. The system creates a new Note/Folder and displays it on the homepage
+4. The system creates a new Note/Folder and displays it on the homepage.
 - **Primary Postconditions:**
 -  A new Note/Folder is created with the name the user specified and is available to the user on the homepage. 
 - **Alternate Sequence:**
-3. The user does not enter a name and clicks the create button
-- a. The Note/Folder is still created, but has the name "untitled"
+3. The user does not enter a name and clicks the create button.
+- a. The Note/Folder is still created, but has the name "untitled".
 
 <br>
 
 9. Ability to move notes into different folder (Anthony)
-- **Pre-condition:** The user is on their homepage
-- **Trigger:** The user right clicks one of their notes and selects the “Move to folder” option.
+- **Pre-condition:** The user is on their homepage.
+- **Trigger:** The user clicks on one or many of their notes and selects the “Move to folder” option.
 - **Primary Sequence:**
-1. The system prompts the user to select which folder they want to move the note to.
+1. The system prompts the user to select which folder they want to move the note(s) to.
 2. The user selects the folder.
-3. The user clicks the “move” button
-4. The system moves the note to the corresponding folder
+3. The user clicks the “move” button.
+4. The system moves the note(s) to the corresponding folder.
 - **Primary Postconditions:**
 - The folder is in the correct location and the user is brought to the default homepage.
 - **Alternate Sequence:**
 1. The user clicks the exit button at any point in the process.
-- a. The user is brought back to the hompage
+- a. The user is brought back to the homepage.
 
 <br>
 
@@ -259,23 +256,20 @@ If the session times out due to inactivity, the system automatically logs out th
 <br>
 
 14. Delete Notes (CJ)
-Pre-condition: 
-The user must be logged into the note-taking application.
-The user must have created or have access to the notes they intend to delete.
-Trigger: The user's explicit action or request to remove one or multiple notes from the note-taking application.
-Primary Sequence: 
- The user navigates to the list of notes within the application.
-The user selects one or multiple notes they wish to delete by either using checkboxes or highlighting the notes.
-The user clicks on the "Delete" button or a similar action to remove the selected notes.
-The system confirms the user's intent to delete the selected notes.
-The system permanently erases the selected notes from the database or storage.
-Primary Postconditions: 
-The selected notes are permanently deleted from the application.
-The system updates the note list to reflect the removed notes.
-Confirmation of successful deletion is provided to the user.
-Alternate Sequence: 
-If the user chooses to cancel the deletion action, the system returns the user to the notes list without removing the selected notes.
-If an error occurs during the deletion process, the system informs the user of the failure to delete the notes and suggests retrying the action later.
+- **Pre-condition:** The user must be logged into the note-taking application. The user also must have created or have access to the notes they intend to delete.
+- **Trigger:** The user's explicit action or request to remove one or multiple notes from the note-taking application.
+- **Primary Sequence:** 
+1. The user navigates to their note on the homescreen of the application.
+2. The user selects one or multiple notes they wish to delete by clicking on them once.
+3. The user clicks on the "Delete" button to remove the selected notes.
+4. The system confirms the user's intent to delete the selected notes.
+5. The system permanently erases the selected notes from the database.
+- **Primary Postconditions:** 
+- The selected notes are permanently deleted from the application.
+- The system updates the note list to reflect the removed notes.
+- Confirmation of successful deletion is provided to the user.
+- **Alternate Sequence:** 
+4. If the user chooses to cancel the deletion action, the system returns the user to the notes list without removing the selected notes.
 
 
 
