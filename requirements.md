@@ -10,7 +10,7 @@
 9. Move notes into different categories/folders (Anthony)
 10. Add a password protected folder (Charles)
 11. Advance search items with regular expressions or filters by categories (Thy)
-12. Favorite and unfavorite notes(Charles)
+12. Opening Notes and Folders (Charles)
 13. Save notes as, pdf, etc (Thy)
 14. Delete notes  (CJ)
 
