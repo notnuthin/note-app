@@ -17,7 +17,7 @@
 
 
 Homepage
-![](images/homepage_ui.jpg)
+![](images/homepage_ui.png)
 Login
 ![](images/login_ui.jpg)
 Note Page
