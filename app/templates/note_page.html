@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taking App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #note-container {
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            min-height: 300px;
+        }
+
+        #note-text {
+            width: 100%;
+            height: 100%;
+            border: none;
+            resize: none;
+            font-size: 16px;
+        }
+
+        #save-note-btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="note-container">
+        <textarea id="note-text" placeholder="Start typing your note..."></textarea>
+        <button id="save-note-btn">Save Note</button>
+    </div>
+
+    <script>
+        document.getElementById('save-note-btn').addEventListener('click', function() {
+            const noteContent = document.getElementById('note-text').value;
+            
+            // You can perform additional actions with the note content, such as saving it to the server.
+            console.log('Note content:', noteContent);
+        });
+    </script>
+</body>
+</html>

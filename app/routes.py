@@ -1,6 +1,9 @@
 from flask import render_template
 from .forms import LoginForm
 from app import app_obj
+from flask import render_template
+from flask import redirect
+from flask import flash
 
 @app_obj.route("/")
 @app_obj.route("/index.html")
@@ -19,4 +22,8 @@ def hello():
 @app_obj.route("/login")
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        print("validated")
+        flash(f'Here are the input {form.username.data} and {form.password.data}')
+        return redirect("/")
     return render_template('login.html', form=form)
