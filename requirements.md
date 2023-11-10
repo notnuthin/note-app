@@ -21,7 +21,7 @@ Homepage
 Login
 ![](images/login_ui.jpg)
 Note Page
-![](images/notepage_ui.jpg)
+![](images/notepage_ui.png)
 Profile
 ![](images/profile_ui.jpg)
 Reset Password
