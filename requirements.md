@@ -233,21 +233,16 @@ If the session times out due to inactivity, the system automatically logs out th
 
 <br>
 
-12. Favorite and Unfavorite Notes (Charles)
-- **Pre-condition:** The user needs to be logged in and verified.
-1. The user is on the homepage they want to favorite.
-2. The user is on the note document that they want to favorite.
-- **Trigger:**
-1. On the homepage, the user can right click on the note document and press the “Favorite” button.
-2. On the note document, there will be a “Favorite” button on the toolbar of the notes document.
+12. Opening notes and folders (Charles)
+- **Pre-condition:** The user is on the homepage and is logged in.
+- **Trigger:** The user double clicks on the specified note or folder icon that they want to edit.
 - **Primary Sequence:**
-1. “Favorite” button is pressed.
-2. The system will have a “Favorite” column on the database, taking in a boolean.
-3. If the system reads that it is “TRUE”, it will display the notes under the favorites section of the homepage.
-- a. The system reads “FALSE” nothing is added under the favorites section.
+1. The system will retrieve the file from the database.
+2. The system will display that file’s information to the user.
+- a. If it is a note file it will display the text stored
+- b. If it is a folder file it will display files that are stored in that folder.
 - **Primary Postconditions:**
-1. The note document is added in the favorites section of the homepage.
-2. The note document is unadded from the favorites section of the homepage.
+1. The user is on the note or folder that they wanted to open.
 
 <br>  
 
