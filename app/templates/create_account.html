@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+
+{% block content %}
+<div class = "block_in_middle_of_screen">
+    <h1>Sign Up</h1>
+    <form action="" method="POST" novalidate>
+        {{form.hidden_tag()}}
+        <p> {{form.name.label}} <br>
+        {{form.name(size=32)}}</p>
+
+        <p> {{form.email.label}} <br>
+        {{form.email(size=32)}}</p>
+
+        <p> {{form.username.label}} <br>
+        {{form.username(size=32)}}</p>
+
+        <p> {{form.password.label}} <br>
+        {{form.password(size=32)}}</p>
+
+        <p> {{form.confirm.label}} <br>
+        {{form.confirm(size=32)}}</p>
+
+        <p>{{form.submit()}}</p>
+    </form>
+</div>
+{% endblock %}

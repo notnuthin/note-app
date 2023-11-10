@@ -13,9 +13,6 @@ h1.signin{
 h1.app_name{
     color:#0f0b02;
 }
-form{
-    padding-left: 10%;
-}
 p{
     text-align: left;
 }
@@ -39,11 +36,11 @@ div.background{
 
     position: relative;
 }
-div.sign_in_area{
-    width: 35vw; /* 50% of the viewport width */
-    height: 45vh; /* 50% of the viewport height */
-    background-color: #6b5a36;
+div.block_in_middle_of_screen{
+    width: fit-content; /* Set the width to fit the content */
+    margin: auto; /* Center the block horizontally */
     padding: 20px; /* Add padding as needed */
+    background-color: #6b5a36;
     border-radius: 10px; /* Add border-radius for rounded corners if desired */
 
     color: white; /*text color*/
@@ -53,14 +50,14 @@ div.sign_in_area{
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.sign_in_area form input[type="text"],
-.sign_in_area form input[type="password"] {
-    width: 90%;
+.block_in_middle_of_screen form input[type="text"],
+.block_in_middle_of_screen form input[type="password"] {
+    width: 25vw;
     padding: 8px;
     margin-bottom: 8px;
 }
-.sign_in_area form input[type="submit"]{
-    width: 90%;
+.block_in_middle_of_screen form input[type="submit"]{
+    width: 25vw;
     height: 40px;
     background-color: #a17f38;
     border: none;

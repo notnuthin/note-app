@@ -1,5 +1,5 @@
 from flask import render_template
-from .forms import LoginForm
+from .forms import LoginForm, CreateAccountForm
 from app import app_obj
 from flask import render_template
 from flask import redirect
@@ -27,3 +27,18 @@ def login():
         flash(f'Here are the input {form.username.data} and {form.password.data}')
         return redirect("/")
     return render_template('login.html', form=form)
+
+@app_obj.route("/create_account")
+def signup():
+    form = CreateAccountForm()
+    print(form.validate_on_submit())
+    if form.validate_on_submit():
+            print('do something')
+            print(f'this is the username of the user {form.username.data}')
+            print(f'this is the password of the user {form.password.data}')
+    #         # u = User(username=form.username.data, password=form.password.data,
+    #         #          email=form.email.data)
+    #         # db.session.add(u)
+    #         # db.session.commit()
+            return redirect('/')
+    return render_template("create_account.html", form = form)
