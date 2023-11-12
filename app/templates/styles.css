@@ -25,7 +25,6 @@ footer{
 div.background{
     /* The image used */
     background-image: url("http://localhost:5500/images/background.png");
-
     /* Full height */
     height: 100%; 
 
@@ -64,3 +63,4 @@ div.block_in_middle_of_screen{
     color: white;
     font-size: large;
 }
+
