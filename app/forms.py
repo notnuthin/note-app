@@ -15,3 +15,7 @@ class CreateAccountForm(FlaskForm):
     password = PasswordField('Password',validators=[DataRequired(), EqualTo('confirm', message='Passwords must match')])
     confirm  = PasswordField('Repeat Password')
     submit = SubmitField('Create Account')
+
+class VerificationForm(FlaskForm):
+    code = StringField('Verification', validators=[DataRequired()])
+    submit = SubmitField('Verify')
