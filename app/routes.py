@@ -1,9 +1,10 @@
 from flask import render_template
-from .forms import LoginForm, CreateAccountForm, VerificationForm
+from .forms import LoginForm, CreateAccountForm, VerificationForm, SendEmail
 from app import app_obj, db
 from flask import render_template
 from flask import redirect
 from flask import flash
+from flask_mail import Mail, Message
 from .models import User
 import random
 import string
@@ -47,11 +48,29 @@ def signup():
 
 def generate_verify_code():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)) #Generates a random verification code
+
+@app_obj.route("/send_code", methods = ['GET', 'POST'])
 def send_verify_code():
-    return
+    form = SendEmail()
+    if form.validate_on_submit():
+        found_user = User.query.filter_by(email=form.email.data).first() #Verifies user if email is found
+        if found_user:
+            code = generate_verify_code()
+            found_user.vercode = code
+            db.session.commit()
+            # Code to send mail
+            return redirect('/verify')
+    return render_template("send_code.html", form=form)
+
 @app_obj.route("/verify", methods = ['GET', 'POST'])
 def verify():
     form = VerificationForm()
     if form.validate_on_submit():
-        return redirect('/')
-    return render_template("password_reset.html", form=form)
+        entered_code = form.code.data
+        if entered_code:
+            return redirect('')
+    return render_template("verify.html", form=form)
+
+@app_obj.route("/reset_password", methods = ['POST'])
+def reset_password():
+    return

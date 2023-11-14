@@ -19,3 +19,7 @@ class CreateAccountForm(FlaskForm):
 class VerificationForm(FlaskForm):
     code = StringField('Verification', validators=[DataRequired()])
     submit = SubmitField('Verify')
+
+class SendEmail(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+    submit = SubmitField('Send Email')

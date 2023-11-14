@@ -6,6 +6,7 @@ class User(db.Model):
     username = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable = False)
     email = db.Column(db.String, nullable = False)
+    vercode = db.Column(db.String, nullable=True) #Verification code column, can be null
 
     def set_password(self, password):
         self.password = generate_password_hash(password) #Password is saved as hash?
