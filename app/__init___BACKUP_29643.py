@@ -19,6 +19,13 @@ app_obj.config.from_mapping(
 db = SQLAlchemy(app_obj)
 migrate = Migrate(app_obj, db)
 
+<<<<<<< HEAD
+with app_obj.app_context():
+    from app.models import User, Note, Folder
+    #db.drop_all() #this command deletes the tables so you can add new ones
+    db.create_all()
+from app import routes
+=======
 from .auth import auth as auth_blueprint
 app_obj.register_blueprint(auth_blueprint)
 
@@ -36,3 +43,4 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 from app import main, auth, models
+>>>>>>> main

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/homepage_style.css') }}">
+</head>
+<body>
+    <div id="header">
+        <div id="appName">
+            Easy Notes
+        </div>
+        <div id="searchBar">
+            Search
+        </div>
+        <div id = "profile">
+            Picture Here
+        </div>
+    </div>
+        <div id="header2">
+            Folders
+            <br>
+        </div>
+            <form onsubmit="return newFolder()">
+                <button class="transparentbutton" onclick="submit()">
+                    <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
+                </button>
+            </form>
+            
+            <!-- Temporary create a folder button -->
+            <form action="" method="POST">
+            Create a Folder:
+            {{form.name(size=24)}}
+            {{form.submit()}}
+            </form>
+
+            <!-- Folders section of the website -->
+            <div class="folders-container">
+                <!-- For Loop making an picture button for each folder -->
+                {% for folder in folders %}
+                <form>
+                    <button class="transparentbutton" onclick="submit()">
+                        <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
+                    </button>
+                    {{folder.name}}
+                </form>
+                {% endfor %}
+            </div>
+
+            <!-- Notes section -->
+            <div id="header2">
+                Notes
+            </div>
+            <p class="quail">
+                {% for note in notes %}
+                <form>
+                    <button class="transparentbutton" onclick="submit()">
+                        <img src="{{url_for('static', filename ='Notesmall.png')}}"  alt="Folder Image">
+                    </button>
+                    {{note.name}}
+                </form>
+                {% endfor %}
+            </p>
+    <script>
+        function newFolder(){
+            //gets name from pop-up on user screen
+            var folder = prompt("Please enter the folder name","Untitled");
+            
+            //sending the folder name to the /new_folder route
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/new_folder", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    alert("Data sent successfully!");
+                } else {
+                    alert("Error sending data!");
+                }
+            }
+            };
+            xhr.send(JSON.stringify({data: folder}));
+        }
+
+    </script>
+</body>
