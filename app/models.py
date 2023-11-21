@@ -8,6 +8,10 @@ class User(db.Model):
     email = db.Column(db.String, nullable = False)
     vercode = db.Column(db.String, nullable=True) #Verification code column, can be null
 
+    #TODO: Set Verification_code method, Verification_check method
+    def set_verification(self, vercode):
+        self.vercode = vercode
+ 
     def set_password(self, password):
         self.password = generate_password_hash(password) #Password is saved as hash?
 

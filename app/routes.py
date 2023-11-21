@@ -40,7 +40,7 @@ def signup():
             print(f'this is the username of the user {form.username.data}')
             print(f'this is the password of the user {form.password.data}')
             u = User(username=form.username.data, password=form.password.data,
-                     email=form.email.data)
+                     email=form.email.data, vercode=None) #Added vercode
             db.session.add(u)
             db.session.commit()
             return redirect('/')
@@ -58,7 +58,8 @@ def send_verify_code():
             code = generate_verify_code()
             found_user.vercode = code
             db.session.commit()
-            # Code to send mail
+            #TODO: Code to send mail
+            
             return redirect('/verify')
     return render_template("send_code.html", form=form)
 
@@ -67,10 +68,12 @@ def verify():
     form = VerificationForm()
     if form.validate_on_submit():
         entered_code = form.code.data
+        #TODO: Write code to verify user's code stored in database
         if entered_code:
             return redirect('')
     return render_template("verify.html", form=form)
 
 @app_obj.route("/reset_password", methods = ['POST'])
 def reset_password():
+    #TODO: Code password reset
     return
