@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class = "block_in_middle_of_screen">
-        <h1>Please enter email for verification code.</h1>
+        <h1>Please enter verification code.</h1>
         <form id="VerificationForm" method="POST" action="{{ url_for('verify', email=email, code=code) }}">
             {{ form.hidden_tag() }}
             {{ form.code.label }} <br> 

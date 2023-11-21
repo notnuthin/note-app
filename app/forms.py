@@ -24,3 +24,9 @@ class VerificationForm(FlaskForm):
 class SendEmail(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     submit = SubmitField('Send Email')
+
+class ResetPassword(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    #password = PasswordField('Password',validators=[DataRequired(), EqualTo('confirm', message='Passwords must match')])
+    #confirm  = PasswordField('Repeat Password')
+    submit = SubmitField('Change Password')

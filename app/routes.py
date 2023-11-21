@@ -1,8 +1,8 @@
 from flask import render_template
-from .forms import LoginForm, CreateAccountForm, VerificationForm, SendEmail
+from .forms import LoginForm, CreateAccountForm, VerificationForm, SendEmail, ResetPassword
 from app import app_obj, db, mail
 from flask import render_template
-from flask import redirect
+from flask import redirect, url_for, request
 from flask import flash
 from flask_mail import Message
 from .models import User
@@ -75,13 +75,29 @@ def verify():
         #TODO: Write code to verify user's code stored in database
         found_user = User.query.filter_by(vercode=form.code.data).first() #Finds user with the code
         if found_user:
-            return redirect('/')
+            return redirect(url_for('reset_password', user_id=found_user.id)) #user_id is added as param
         else:
-            redirect('/send_code')
+            flash('Incorrect code.')
+            return redirect('/send_code')
         #...
     return render_template("verify.html", form=form)
 
-@app_obj.route("/reset_password", methods = ['POST'])
-def reset_password():
+@app_obj.route("/reset_password/<int:user_id>", methods = ['GET', 'POST'])
+def reset_password(user_id):
     #TODO: Code password reset
-    return
+    form = ResetPassword()
+    if form.validate_on_submit():
+        #found_user = User.query.filter_by(id=user_id).first()
+        found_user = User.query.get(user_id)
+        print("User is found")
+        if found_user:
+            found_user.password = form.password.data
+            db.session.commit()
+            print("Password Committed to DB")
+            return redirect('/login')
+        else:
+            print("User is not found")
+            flash('User ID not found')
+            return redirect('/')
+    return render_template("reset_password.html", form=form)
+    #...
