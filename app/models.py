@@ -24,7 +24,7 @@ class Note(db.Model):
     body = db.Column(db.String(140))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     note_name = db.Column(db.String, default = "Unnamed note on" + datetime.utcnow().strftime("%m/%d/%Y"))
-    def __repr__(self):
+    
 
 
 class Folder(db.Model):
