@@ -29,3 +29,14 @@
 - Started to divide up roles, began working on html files, and started to learn html (30 minutes)
 - There isn't much for next time since the milestone isn't posted. We'll just do what we can.
 - Basic HTML for some webpages are done.
+
+### 2023-11-14 at 11:15
+- Anthony, Charles
+- Team Updates (10 min)
+- Talking about Next Steps (20 min)
+- Charles worked on the login page, password reset page, and started email verification.
+- Charles will work on making a popup page and finishing password email verfication.
+- Anthony added Notes and Folder models to database, worked on the homepage html, and added a button for creating a new folder.
+- Anthony will work on displaying clickable icons for each note and folder.
+
+

@@ -1,13 +1,28 @@
 <html>
     <head>
         <title>Easy Notes</title>
-        <link rel="stylesheet" type="text/css" href="http://localhost:5500/app/templates/styles.css" />
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" /> 
     </head>
     <body>
-        <div class = "background">
-            <h1 class = "app_name">EasyNote</h1>
-                {% block content %} {% endblock %}
-        </div>
+        <body class = "{% block body_class %}{% endblock %}">
+            <div class = "background">
+                <div class = "header">
+                    <div>
+                    <img src = "{{ url_for('static', filename='img/logo.PNG') }}" height="100px" width="100px" align = "left"/>
+                    <h1 class = "app_name">EasyNote</h1>
+                    </div>
+                    <div class = "nav_bar">
+                        <a href="{{ url_for('main.index') }}">Home</a>
+                        {% if current_user.is_anonymous %}
+                        <a href="{{ url_for('auth.login') }}">Login</a>
+                        {% else %}
+                        <a href="{{ url_for('auth.logout') }}">Logout</a>
+                        {% endif %}
+                    </div>
+                </div>
+                    {% block content %} {% endblock %}
+            </div>
+        </body>
     </body>
 </html>
 

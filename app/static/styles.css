@@ -1,4 +1,6 @@
 /* Add this to your styles.css */
+@charset "UTF-8";
+@font-face { font-family: Qualy; src: url('QualyBold.ttf'); } 
 html, body {
     margin: 0;
     padding: 0;
@@ -7,11 +9,18 @@ html, body {
 hr.solid {
     border-top: 3px solid #bbb;
 }
-h1.signin{
-    text-align: center;
-}
 h1.app_name{
-    color:#0f0b02;
+    color:rgb(20, 148, 161);
+    display: inline-flex;
+    font-size: 300%;
+    font-family: Qualy;
+}
+div.nav_bar{
+    margin-left: auto; 
+    margin-right: 0;
+}
+div.header{
+   display: flex;
 }
 p{
     text-align: left;
@@ -35,19 +44,27 @@ div.background{
 
     position: relative;
 }
+body.signup .background {
+    background-image: url('../static/img/signup.PNG');
+}
+
+body.login .background {
+    background-image: url('../static/img/login.PNG');
+}
 div.block_in_middle_of_screen{
     width: fit-content; /* Set the width to fit the content */
     margin: auto; /* Center the block horizontally */
     padding: 20px; /* Add padding as needed */
-    background-color: #6b5a36;
-    border-radius: 10px; /* Add border-radius for rounded corners if desired */
 
-    color: white; /*text color*/
+    color: black; /*text color*/
 
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 80%;
     transform: translate(-50%, -50%);
+}
+div.logo{
+    background-image: url("../../images/logo.PNG");
 }
 .block_in_middle_of_screen form input[type="text"],
 .block_in_middle_of_screen form input[type="password"] {
@@ -58,7 +75,7 @@ div.block_in_middle_of_screen{
 .block_in_middle_of_screen form input[type="submit"]{
     width: 25vw;
     height: 40px;
-    background-color: #a17f38;
+    background-color: rgb(20, 148, 161);
     border: none;
     color: white;
     font-size: large;
