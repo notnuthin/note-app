@@ -1,10 +1,10 @@
 from flask import render_template
 from .forms import LoginForm, CreateAccountForm, VerificationForm, SendEmail
-from app import app_obj, db
+from app import app_obj, db, mail
 from flask import render_template
 from flask import redirect
 from flask import flash
-from flask_mail import Mail, Message
+from flask_mail import Message
 from .models import User
 import random
 import string
@@ -59,7 +59,12 @@ def send_verify_code():
             found_user.vercode = code
             db.session.commit()
             #TODO: Code to send mail
-            
+            subject = 'Verification Code'
+            body = f'Your verification code is: {code}'
+            recipient = form.email.data
+            message = Message(subject=subject, recipients=[recipient], body=body)
+            mail.send(message)
+            #...
             return redirect('/verify')
     return render_template("send_code.html", form=form)
 
@@ -67,10 +72,13 @@ def send_verify_code():
 def verify():
     form = VerificationForm()
     if form.validate_on_submit():
-        entered_code = form.code.data
         #TODO: Write code to verify user's code stored in database
-        if entered_code:
-            return redirect('')
+        found_user = User.query.filter_by(vercode=form.code.data).first() #Finds user with the code
+        if found_user:
+            return redirect('/')
+        else:
+            redirect('/send_code')
+        #...
     return render_template("verify.html", form=form)
 
 @app_obj.route("/reset_password", methods = ['POST'])
