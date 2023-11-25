@@ -18,25 +18,25 @@
             Folders
             <br>
         </div>
-            <form onsubmit="return newFolder()">
-                <button class="transparentbutton" onclick="submit()">
-                    <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
-                </button>
-            </form>
-            
             <!-- Temporary create a folder button -->
             <form action="" method="POST">
             Create a Folder:
             {{form.name(size=24)}}
             {{form.submit()}}
             </form>
-
+            <button id="simplebutton">Test Double Single</button>
+            <button id="moveFolder">Move to Folder</button>
             <!-- Folders section of the website -->
-            <div class="folders-container">
+            <div class="icons-container">
+                <form onsubmit="return newFolder()">
+                    <button class="transparentbutton" onclick="submit()">
+                        <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
+                    </button>
+                </form>
                 <!-- For Loop making an picture button for each folder -->
                 {% for folder in folders %}
-                <form>
-                    <button class="transparentbutton" onclick="submit()">
+                <form onsubmit="return false;">
+                    <button class="transparentbutton folderbutton" id="{{folder.id}}" onclick="toggleFSelection('{{folder.id}}')">
                         <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
                     </button>
                     {{folder.name}}
@@ -48,36 +48,165 @@
             <div id="header2">
                 Notes
             </div>
-            <p class="quail">
-                {% for note in notes %}
-                <form>
+            <!-- Trigger button to show the prompt -->
+            <button onclick="showCustomPrompt()">Open Prompt</button>
+            <!-- Custom overlay and modal for the prompt -->
+            <div class="overlay" id="customPromptOverlay">
+                <div class="modal">
+                    <label for="dropdown">Select an option:</label>
+                    <select id="dropdown">
+                        {% for folder in folders %}
+                        <option value="{{folder.name}}">{{folder.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <button onclick="submitCustomPrompt()">Submit</button>
+                    <button onclick="closeCustomPrompt()">Cancel</button>
+                </div>
+            </div>
+            <div class="icons-container">
+                <form onsubmit="return newNote()">
                     <button class="transparentbutton" onclick="submit()">
-                        <img src="{{url_for('static', filename ='Notesmall.png')}}"  alt="Folder Image">
+                        <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
+                    </button>
+                </form>
+
+                {% for note in notes %}
+                <form onsubmit="return false;">
+                    <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')">
+                        <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
                     </button>
                     {{note.name}}
                 </form>
                 {% endfor %}
-            </p>
+            </div>
     <script>
+        // Keep track of selected notes
+        const selectedNotes = new Set();
+
+        // Function to toggle the selection of a note
+        function toggleSelection(noteId) {
+            const noteElement = document.querySelector(`[id="${noteId}"].notebutton`);
+            // Toggle the 'selected' class for visual feedback
+            noteElement.classList.toggle('selected');
+
+            // Toggle the note in the set of selected notes
+            if (selectedNotes.has(noteId)) {
+                selectedNotes.delete(noteId);
+            } else {
+                selectedNotes.add(noteId);
+            }
+        }
+
+        function toggleSelectionAll(){
+            selectedNotes.forEach(function(value){
+                toggleSelection(value);
+            }
+            );
+        }
+        
+        // Function to show the custom prompt CGPT
+            function showCustomPrompt() {
+                document.getElementById('customPromptOverlay').style.display = 'flex';
+            }
+
+            //Function to close the prompt
+            function closeCustomPrompt() {
+                document.getElementById('customPromptOverlay').style.display = 'none';
+                toggleSelectionAll();
+            }
+
+            // Function to submit the custom prompt
+            function submitCustomPrompt() {
+                // Get the selected value from the dropdown
+                var selectedFolder = document.getElementById('dropdown').value;
+                var selectedNotesArray = Array.from(selectedNotes);
+                // Make an AJAX request to the server to update the database CGPT
+                fetch('/updateDatabase', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        selectedFolder,
+                        selectedNotes: selectedNotesArray,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the server's response, if needed
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+                // Close the custom prompt
+                closeCustomPrompt();
+            }
+
+        simplebutton.onclick = event => {
+            if(event.detail==1){
+                document.getElementByID("moveFolder").style.visiblity="hidden"
+            }
+            else if (event.detail==2) {
+                // This should probably open the folder for viewing
+                alert("double")
+            }
+        }
+
         function newFolder(){
             //gets name from pop-up on user screen
             var folder = prompt("Please enter the folder name","Untitled");
-            
-            //sending the folder name to the /new_folder route
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/new_folder", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    alert("Data sent successfully!");
-                } else {
-                    alert("Error sending data!");
-                }
+            if (folder == null) {
+                console.log("User pressed Cancel");
             }
-            };
-            xhr.send(JSON.stringify({data: folder}));
+            else
+            {
+                console.log(folder);
+                //sending the folder name to the /new_folder route
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/new_folder", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    print(xhr.status)
+                    if (xhr.status === 200) {
+                        alert("Data sent successfully!");
+                    } else {
+                        alert("Error sending data!");
+                    }
+                }
+                };
+                xhr.send(JSON.stringify({data: folder}));
+            }
         }
+
+        function newNote(){
+            //gets name from pop-up on user screen
+            var note = prompt("Please enter the note name","Untitled");
+            if (note == null) {
+                console.log("User pressed Cancel");
+            }
+            else
+            {
+                //sending the folder name to the /new_folder route
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/new_note", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    print(xhr.status)
+                    if (xhr.status === 200) {
+                        alert("Data sent successfully!");
+                    } else {
+                        alert("Error sending data!");
+                    }
+                }
+                };
+                xhr.send(JSON.stringify({data: note}));
+            }
+        }
+
 
     </script>
 </body>

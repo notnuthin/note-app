@@ -23,14 +23,15 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     body = db.Column(db.String(140))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    note_name = db.Column(db.String, default = "Unnamed note on" + datetime.utcnow().strftime("%m/%d/%Y"))
-    
-
+    name = db.Column(db.String, default = "Unnamed note on" + datetime.utcnow().strftime("%m/%d/%Y"))
+    folder_id = db.Column(db.Integer, db.ForeignKey('folder.id'))
+    folder = db.relationship('Folder', back_populates='notes')
 
 class Folder(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String, nullable=False)
+    notes = db.relationship('Note', back_populates='folder')
     
 
     
