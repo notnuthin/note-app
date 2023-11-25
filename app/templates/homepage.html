@@ -3,18 +3,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/homepage_style.css') }}">
 </head>
 <body>
-    <div id="mainPage">
-        <div id="header">
-            <div id="appName">
-                Easy Notes
-            </div>
-            <div id="searchBar">
-                Search
-            </div>
+    
+    <div id="header">
+        <div id="appName">
+            Easy Notes
+        </div>
+        <div id="searchBar">
+            Search
+        </div>
             <div id = "profile">
                 Picture Here
             </div>
         </div>
+    <div id="mainPage">
             <div id="header2">
                 Folders
                 <br>
@@ -31,7 +32,7 @@
                     <!-- For Loop making an picture button for each folder -->
                     {% for folder in folders %}
                     <form onsubmit="return false;">
-                        <button class="transparentbutton folderbutton" id="{{folder.id}}" onclick="toggleFSelection('{{folder.id}}')">
+                        <button class="transparentbutton folderbutton" id="{{folder.id}}" onclick="openFolder({{folder.id}})">
                             <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
                         </button>
                         {{folder.name}}
@@ -67,7 +68,7 @@
 
                     {% for note in notes %}
                     <form onsubmit="return false;">
-                        <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')">
+                        <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')" ondblclick="openNote('{{note.id}}')">
                             <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
                         </button>
                         {{note.name}}
@@ -75,7 +76,63 @@
                     {% endfor %}
                 </div>
         </div>
+        <div id="notesArea" class="invisible">
+            <div id="header2">
+                Notes
+            </div>
+            <div id="notesContainer" class="icons-container">
+                Hahaha
+            </div>
+        </div>
     <script>
+        // Function to open the note page
+        function openNote(noteId) {
+            // Redirect to the note page URL in Flask
+            window.location.href = `/note/${noteId}`; // Replace with your actual route
+        }
+
+        function openFolder(folderId) {
+            const notesArea = document.getElementById('notesArea');
+            notesArea.classList.toggle('invisible');
+            const mainPage = document.getElementById('mainPage');
+            mainPage.classList.toggle('invisible');
+
+            fetch(`/get_notes/${folderId}`)
+                .then(response => response.json())
+                .then(notes => {
+                    const notesContainer = document.getElementById('notesContainer');
+                    
+                    // Clear previous notes
+                    notesContainer.innerHTML = '';
+
+                    // Create and append note elements
+                    notes.forEach(note => {
+                        const form = document.createElement('form');
+                        form.onsubmit = () => false;
+
+                        const button = document.createElement('button');
+                        button.className = 'transparentbutton notebutton';
+                        button.id = note["id"];
+                        button.onclick = () => toggleSelection(note["id"]);
+
+                        const img = document.createElement('img');
+                        img.src = '{{ url_for("static", filename="smallNote.jpg") }}';
+                        img.alt = 'Note Image';
+
+                        const noteName = document.createTextNode(note["name"]);
+
+                        button.appendChild(img);
+                        form.appendChild(button);
+                        form.appendChild(noteName);
+
+                        notesContainer.appendChild(form);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+        
         // Keep track of selected notes
         const selectedNotes = new Set();
 
@@ -100,6 +157,9 @@
             );
         }
         
+        function toggleMain(){
+            document.getElementById('mainPage').classList.toggle('invisible');
+        }
         // Function to show the custom prompt CGPT
             function showCustomPrompt() {
                 document.getElementById('customPromptOverlay').style.display = 'flex';
@@ -142,11 +202,11 @@
 
         simplebutton.onclick = event => {
             if(event.detail==1){
-                document.getElementByID("moveFolder").style.visiblity="hidden"
+                toggleMain();
             }
             else if (event.detail==2) {
                 // This should probably open the folder for viewing
-                alert("double")
+                alert("double");
             }
         }
 

@@ -31,11 +31,6 @@ div#header div{
     color: #08a3d9; 
 }
 
-.quail{
-    font-size: 8pt;
-    color: #08a3d9; 
-}
-
 .transparentbutton{
     background-color: rgba(0, 255, 208, 0.667); /*Fully transparent background */
     border: 3px solid #000000; 
@@ -94,4 +89,8 @@ select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.invisible{
+    display:none;
 }

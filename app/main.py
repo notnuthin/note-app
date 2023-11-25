@@ -74,9 +74,6 @@ def update_database():
                 # Append the note to the notes relationship in the folder
                 if folder and note not in folder.notes:
                     folder.notes.append(note)
-                
-
-
         # Commit the changes
         db.session.commit()
 
@@ -87,9 +84,22 @@ def update_database():
         # Handle errors and return an error response
         return jsonify({'success': False, 'error': str(e)})
     
-@app_obj.route("/note")
-def notepage():
-    return render_template("note_page.html")
+# Route to serve notes data for a given folder ID
+@app_obj.route("/get_notes/<int:folder_id>")
+def get_notes(folder_id):
+    folder = Folder.query.filter_by(id=folder_id).first()
+    if folder:
+        notes = [{'id': note.id, 'name': note.name} for note in folder.notes]
+        return jsonify(notes)
+    else:
+        return jsonify({'error': 'Folder not found'}), 404
+
+@app_obj.route('/note/<int:note_id>')
+def note_page(note_id):
+    # Fetch note based on the note_id
+    note = Note.query.filter_by(id=note_id).first()
+    # Render the note page template 
+    return render_template('note_page.html', note=note)
 
 
 
