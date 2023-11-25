@@ -3,82 +3,78 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/homepage_style.css') }}">
 </head>
 <body>
-    <div id="header">
-        <div id="appName">
-            Easy Notes
-        </div>
-        <div id="searchBar">
-            Search
-        </div>
-        <div id = "profile">
-            Picture Here
-        </div>
-    </div>
-        <div id="header2">
-            Folders
-            <br>
-        </div>
-            <!-- Temporary create a folder button -->
-            <form action="" method="POST">
-            Create a Folder:
-            {{form.name(size=24)}}
-            {{form.submit()}}
-            </form>
-            <button id="simplebutton">Test Double Single</button>
-            <button id="moveFolder">Move to Folder</button>
-            <!-- Folders section of the website -->
-            <div class="icons-container">
-                <form onsubmit="return newFolder()">
-                    <button class="transparentbutton" onclick="submit()">
-                        <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
-                    </button>
-                </form>
-                <!-- For Loop making an picture button for each folder -->
-                {% for folder in folders %}
-                <form onsubmit="return false;">
-                    <button class="transparentbutton folderbutton" id="{{folder.id}}" onclick="toggleFSelection('{{folder.id}}')">
-                        <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
-                    </button>
-                    {{folder.name}}
-                </form>
-                {% endfor %}
+    <div id="mainPage">
+        <div id="header">
+            <div id="appName">
+                Easy Notes
             </div>
-
-            <!-- Notes section -->
+            <div id="searchBar">
+                Search
+            </div>
+            <div id = "profile">
+                Picture Here
+            </div>
+        </div>
             <div id="header2">
-                Notes
+                Folders
+                <br>
             </div>
-            <!-- Trigger button to show the prompt -->
-            <button onclick="showCustomPrompt()">Open Prompt</button>
-            <!-- Custom overlay and modal for the prompt -->
-            <div class="overlay" id="customPromptOverlay">
-                <div class="modal">
-                    <label for="dropdown">Select an option:</label>
-                    <select id="dropdown">
-                        {% for folder in folders %}
-                        <option value="{{folder.name}}">{{folder.name}}</option>
-                        {% endfor %}
-                    </select>
-                    <button onclick="submitCustomPrompt()">Submit</button>
-                    <button onclick="closeCustomPrompt()">Cancel</button>
+                <button id="simplebutton">Test Double Single</button>
+                <button id="moveFolder">Move to Folder</button>
+                <!-- Folders section of the website -->
+                <div class="icons-container">
+                    <form onsubmit="return newFolder()">
+                        <button class="transparentbutton" onclick="submit()">
+                            <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
+                        </button>
+                    </form>
+                    <!-- For Loop making an picture button for each folder -->
+                    {% for folder in folders %}
+                    <form onsubmit="return false;">
+                        <button class="transparentbutton folderbutton" id="{{folder.id}}" onclick="toggleFSelection('{{folder.id}}')">
+                            <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
+                        </button>
+                        {{folder.name}}
+                    </form>
+                    {% endfor %}
                 </div>
-            </div>
-            <div class="icons-container">
-                <form onsubmit="return newNote()">
-                    <button class="transparentbutton" onclick="submit()">
-                        <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
-                    </button>
-                </form>
 
-                {% for note in notes %}
-                <form onsubmit="return false;">
-                    <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')">
-                        <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
-                    </button>
-                    {{note.name}}
-                </form>
-                {% endfor %}
-            </div>
+                <!-- Notes section -->
+                <div id="header2">
+                    Notes
+                </div>
+                <!-- Trigger button to show the prompt -->
+                <button onclick="showCustomPrompt()">Open Prompt</button>
+                <!-- Custom overlay and modal for the prompt -->
+                <div class="overlay" id="customPromptOverlay">
+                    <div class="modal">
+                        <label for="dropdown">Select an option:</label>
+                        <select id="dropdown">
+                            {% for folder in folders %}
+                            <option value="{{folder.name}}">{{folder.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <button onclick="submitCustomPrompt()">Submit</button>
+                        <button onclick="closeCustomPrompt()">Cancel</button>
+                    </div>
+                </div>
+                <div class="icons-container">
+                    <form onsubmit="return newNote()">
+                        <button class="transparentbutton" onclick="submit()">
+                            <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
+                        </button>
+                    </form>
+
+                    {% for note in notes %}
+                    <form onsubmit="return false;">
+                        <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')">
+                            <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
+                        </button>
+                        {{note.name}}
+                    </form>
+                    {% endfor %}
+                </div>
+        </div>
     <script>
         // Keep track of selected notes
         const selectedNotes = new Set();

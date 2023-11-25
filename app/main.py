@@ -21,16 +21,6 @@ def homepage():
     print("hello")
     # print(users)
     formF = CreateFolderForm()
-    
-    print(formF.validate_on_submit())
-    if formF.validate_on_submit():
-        # data = request.get_json()
-        # print("User input:", data)
-        f = Folder(name = formF.name.data, id = 0)
-        db.session.add(f)
-        db.session.commit()
-        print({formF.name.data})
-        return redirect("/homepage")
     return render_template("homepage.html", form = formF, folders = folders, notes = notes)#users = users)
 
 @app_obj.route('/new_folder', methods=['POST'])
