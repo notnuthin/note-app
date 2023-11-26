@@ -39,4 +39,11 @@
 - Anthony added Notes and Folder models to database, worked on the homepage html, and added a button for creating a new folder.
 - Anthony will work on displaying clickable icons for each note and folder.
 
-
+### 2023-11-21 at 11:20
+- Anthony, Charles, Thy
+- Team Updates (15 min)
+- Attempting to merge (45 min)
+- Thy implemented a login/signup system and a database testing system. 
+- Anthony worked on the homepage, adding a button to make new folders and a way to display all notes and folders.
+- Charles worked more on the password resetting system. 
+- The team will continue working on creating a fully working merged system and on their respective features.
