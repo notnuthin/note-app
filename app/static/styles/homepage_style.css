@@ -27,7 +27,7 @@ div#header div{
 }
 
 #header2{
-    font-size: 8pt;
+    font-size: 16pt;
     color: #08a3d9; 
 }
 
@@ -61,7 +61,7 @@ div#header div{
 }
 
 .selected {
-    border-color: aquamarine;
+    border-color: #ace6ff;
 }
 
  /* Styles for the overlay */

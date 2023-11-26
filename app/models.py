@@ -9,6 +9,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String, nullable = False)
     email = db.Column(db.String, nullable = False)
     notes = db.relationship('Note', backref = 'author', lazy = 'dynamic')
+    folders = db.relationship('Folder', backref = 'author', lazy = 'dynamic')
     
     def set_password(self, password):
         self.password = generate_password_hash(password) #Password is saved as hash?
@@ -29,7 +30,7 @@ class Note(db.Model):
 
 class Folder(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     name = db.Column(db.String, nullable=False)
     notes = db.relationship('Note', back_populates='folder')
     

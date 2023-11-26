@@ -40,7 +40,7 @@ def signup():
             db.session.add(u)
             db.session.commit()
             print("user added")
-            return redirect('/')
+            return redirect('/login')
     return render_template("signup.html", form = form, page_type = 'signup')
 
 @auth.route('/logout')

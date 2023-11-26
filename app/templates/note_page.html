@@ -35,20 +35,42 @@
     </style>
 </head>
 <body>
+    <!-- Area containing the note text area input and the save not button -->
     <div id="note-container">
         <textarea rows=10 id="note-text" placeholder="Start typing your note..."></textarea>
         <button id="save-note-btn">Save Note</button>
     </div>
 
     <script>
+        // Sets the text area to the body of the current note
+        document.getElementById('note-text').value = "{{note.body}}";
+
+        // Code for the save not button, which sends a fetch request to the '/updateNote' route that does it
         document.getElementById('save-note-btn').addEventListener('click', function() {
+            //gets the input from text area
             const noteContent = document.getElementById('note-text').value;
             
-            // You can perform additional actions with the note content, such as saving it to the server.
-            console.log('Note content:', noteContent);
-        });
+            //fetch request sending the data to the route
+            fetch('/updateNote', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    note_id:'{{note.id}}',
+                    note_content: noteContent,
+                }),
+            })
+            .then(response => response.json())  // Convert the route response to JSON format
+            .then(data => {
+                console.log(data);  // Log the response from the server
+            })
+            .catch(error => {
+                console.error('Error:', error);  // Log any errors that occurred during the fetch request
+            }); 
+           
+        })
 
-        document.getElementById('note-text').value = "{{note.body}}";
     </script>
 </body>
 </html>

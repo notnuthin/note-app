@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/homepage_style.css') }}">
 </head>
 <body>
-    
+    <!-- The header for the homepage -->
     <div id="header">
         <div id="appName">
             Easy Notes
@@ -14,69 +14,79 @@
             <div id = "profile">
                 Picture Here
             </div>
-        </div>
+    </div>
+    <!-- The main section of the page which includes the folders and notes -->
     <div id="mainPage">
-            <div id="header2">
-                Folders
-                <br>
-            </div>
-                <button id="simplebutton">Test Double Single</button>
-                <button id="moveFolder">Move to Folder</button>
-                <!-- Folders section of the website -->
-                <div class="icons-container">
-                    <form onsubmit="return newFolder()">
-                        <button class="transparentbutton" onclick="submit()">
-                            <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
-                        </button>
-                    </form>
-                    <!-- For Loop making an picture button for each folder -->
-                    {% for folder in folders %}
-                    <form onsubmit="return false;">
-                        <button class="transparentbutton folderbutton" id="{{folder.id}}" onclick="openFolder({{folder.id}})">
-                            <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
-                        </button>
-                        {{folder.name}}
-                    </form>
-                    {% endfor %}
-                </div>
 
-                <!-- Notes section -->
-                <div id="header2">
-                    Notes
-                </div>
-                <!-- Trigger button to show the prompt -->
-                <button onclick="showCustomPrompt()">Open Prompt</button>
-                <!-- Custom overlay and modal for the prompt -->
-                <div class="overlay" id="customPromptOverlay">
-                    <div class="modal">
-                        <label for="dropdown">Select an option:</label>
-                        <select id="dropdown">
-                            {% for folder in folders %}
-                            <option value="{{folder.name}}">{{folder.name}}</option>
-                            {% endfor %}
-                        </select>
-                        <button onclick="submitCustomPrompt()">Submit</button>
-                        <button onclick="closeCustomPrompt()">Cancel</button>
-                    </div>
-                </div>
-                <div class="icons-container">
-                    <form onsubmit="return newNote()">
-                        <button class="transparentbutton" onclick="submit()">
-                            <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
-                        </button>
-                    </form>
-
-                    {% for note in notes %}
-                    <form onsubmit="return false;">
-                        <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')" ondblclick="openNote('{{note.id}}')">
-                            <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
-                        </button>
-                        {{note.name}}
-                    </form>
-                    {% endfor %}
-                </div>
+        <!-- Folders section of the website -->
+        <div id="header2">
+            Folders
+            <br>
         </div>
-        <div id="notesArea" class="invisible">
+
+        <div class="icons-container">
+            <!-- New Folder Button -->
+            <form onsubmit="return newFolder()">
+                <button class="transparentbutton" onclick="submit()">
+                    <img src="{{url_for('static', filename ='plus.png')}}"  alt="Folder Image">
+                </button>
+            </form>
+            <!-- For Loop making an picture button for each folder -->
+            {% for folder in folders %}
+            <form onsubmit="return false;">
+                <button class="transparentbutton folderbutton" id="{{folder.id}}" onclick="openFolder({{folder.id}})">
+                    <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
+                </button>
+                {{folder.name}}
+            </form>
+            {% endfor %}
+        </div>
+
+        <!-- Notes section -->
+        <div id="header2">
+            Notes
+        </div>
+
+        <!-- Button for moving notes to folder -->
+        <button onclick="showCustomPrompt()">Move Selected Notes to Folder</button>
+        <!-- overlay and modal for the folder dropdown -->
+        <div class="overlay" id="customPromptOverlay">
+            <!-- Pop-up for when you click the button -->
+            <div class="modal">
+                <label for="dropdown">Select an option:</label>
+                <select id="dropdown">
+                    {% for folder in folders %}
+                    <option value="{{folder.id}}">{{folder.name}}</option>
+                    {% endfor %}
+                </select>
+                <button onclick="submitCustomPrompt()">Submit</button>
+                <button onclick="closeCustomPrompt()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Where all the notes and new note button are contained -->
+        <div class="icons-container">
+            <!-- New Note button -->
+            <form onsubmit="return newNote()">
+                <button class="transparentbutton" onclick="submit()">
+                    <img src="{{url_for('static', filename ='plus.png')}}"  alt="Note Image">
+                </button>
+            </form>
+
+            <!-- For loop for displaying each note -->
+            {% for note in notes %}
+            <form onsubmit="return false;">
+                <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')" ondblclick="openNote('{{note.id}}')">
+                    <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
+                </button>
+                {{note.name}}
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Where the notes will be contained when you open a folder, starts invisible -->
+    <div id="notesArea" class="invisible">
             <div id="header2">
                 Notes
             </div>
@@ -84,19 +94,24 @@
                 Hahaha
             </div>
         </div>
+
+    <!-- Start of Javascript -->
     <script>
         // Function to open the note page
         function openNote(noteId) {
             // Redirect to the note page URL in Flask
-            window.location.href = `/note/${noteId}`; // Replace with your actual route
+            window.location.href = `/note/${noteId}`; 
         }
 
+        //Function for opening folder
         function openFolder(folderId) {
+            //Taking main page off of display and making note area visible
             const notesArea = document.getElementById('notesArea');
             notesArea.classList.toggle('invisible');
             const mainPage = document.getElementById('mainPage');
             mainPage.classList.toggle('invisible');
 
+            //fetch request to get the notes for the folder being opened
             fetch(`/get_notes/${folderId}`)
                 .then(response => response.json())
                 .then(notes => {
@@ -105,26 +120,32 @@
                     // Clear previous notes
                     notesContainer.innerHTML = '';
 
-                    // Create and append note elements
+                    // Create and append note elements to container
                     notes.forEach(note => {
                         const form = document.createElement('form');
                         form.onsubmit = () => false;
 
+                        //Sets the functionality of the button for each note
                         const button = document.createElement('button');
                         button.className = 'transparentbutton notebutton';
                         button.id = note["id"];
                         button.onclick = () => toggleSelection(note["id"]);
+                        button.ondblclick = () => openNote(note["id"]);
 
+                        //Creating the image for each note
                         const img = document.createElement('img');
                         img.src = '{{ url_for("static", filename="smallNote.jpg") }}';
                         img.alt = 'Note Image';
 
+                        //Displaying the name of each note
                         const noteName = document.createTextNode(note["name"]);
 
+                        //Adding that all to the form 
                         button.appendChild(img);
                         form.appendChild(button);
                         form.appendChild(noteName);
 
+                        //Adding the form to the container
                         notesContainer.appendChild(form);
                     });
                 })
@@ -133,16 +154,16 @@
                 });
         }
         
-        // Keep track of selected notes
+        // Keeps track of selected notes
         const selectedNotes = new Set();
 
         // Function to toggle the selection of a note
         function toggleSelection(noteId) {
             const noteElement = document.querySelector(`[id="${noteId}"].notebutton`);
-            // Toggle the 'selected' class for visual feedback
+            // Toggle the 'selected' class for the note
             noteElement.classList.toggle('selected');
 
-            // Toggle the note in the set of selected notes
+            // Add the note to the set of selected notes, or remove it
             if (selectedNotes.has(noteId)) {
                 selectedNotes.delete(noteId);
             } else {
@@ -150,6 +171,7 @@
             }
         }
 
+        //Toggles the selection of all notes
         function toggleSelectionAll(){
             selectedNotes.forEach(function(value){
                 toggleSelection(value);
@@ -157,59 +179,52 @@
             );
         }
         
+        //Removes main page from display
         function toggleMain(){
             document.getElementById('mainPage').classList.toggle('invisible');
         }
-        // Function to show the custom prompt CGPT
-            function showCustomPrompt() {
-                document.getElementById('customPromptOverlay').style.display = 'flex';
-            }
 
-            //Function to close the prompt
-            function closeCustomPrompt() {
-                document.getElementById('customPromptOverlay').style.display = 'none';
-                toggleSelectionAll();
-            }
-
-            // Function to submit the custom prompt
-            function submitCustomPrompt() {
-                // Get the selected value from the dropdown
-                var selectedFolder = document.getElementById('dropdown').value;
-                var selectedNotesArray = Array.from(selectedNotes);
-                // Make an AJAX request to the server to update the database CGPT
-                fetch('/updateDatabase', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        selectedFolder,
-                        selectedNotes: selectedNotesArray,
-                    }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle the server's response, if needed
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-
-                // Close the custom prompt
-                closeCustomPrompt();
-            }
-
-        simplebutton.onclick = event => {
-            if(event.detail==1){
-                toggleMain();
-            }
-            else if (event.detail==2) {
-                // This should probably open the folder for viewing
-                alert("double");
-            }
+        // Function to show the move to folder popup
+        function showCustomPrompt() {
+            document.getElementById('customPromptOverlay').style.display = 'flex';
         }
 
+        //Function to close the move to folder popup
+        function closeCustomPrompt() {
+            document.getElementById('customPromptOverlay').style.display = 'none';
+            toggleSelectionAll();
+        }
+
+        // Function to submit the request to move notes to a folder
+        function submitCustomPrompt() {
+            // Get the selected folder from the dropdown and the selected notes
+            var selectedFolder = document.getElementById('dropdown').value;
+            var selectedNotesArray = Array.from(selectedNotes);
+            // Make an AJAX request to flask to move the notes to that folder
+            fetch('/updateDatabase', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    selectedFolder,
+                    selectedNotes: selectedNotesArray,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the server's response, if needed
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+            // Close the popup
+            closeCustomPrompt();
+        }
+
+        //Function for making a new folder
         function newFolder(){
             //gets name from pop-up on user screen
             var folder = prompt("Please enter the folder name","Untitled");
@@ -218,8 +233,7 @@
             }
             else
             {
-                console.log(folder);
-                //sending the folder name to the /new_folder route
+                //sending the folder name to the /new_folder route via xhr
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "/new_folder", true);
                 xhr.setRequestHeader("Content-Type", "application/json");
@@ -245,7 +259,7 @@
             }
             else
             {
-                //sending the folder name to the /new_folder route
+                //sending the note name to the /new_note route via xhr
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "/new_note", true);
                 xhr.setRequestHeader("Content-Type", "application/json");
