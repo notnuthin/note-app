@@ -47,3 +47,15 @@
 - Anthony worked on the homepage, adding a button to make new folders and a way to display all notes and folders.
 - Charles worked more on the password resetting system. 
 - The team will continue working on creating a fully working merged system and on their respective features.
+
+### 2023-11-26 at 15:00
+- Anthony, Charles, CJ, Thy
+- Update on Anthony's Code (15 min)
+- Merge Request (5 min)
+- Going over Milestone 2 (10 min)
+- Updating Github and splitting up work for Milestone 2 (10  min)
+- Anthony worked on the homepage, including a system to make new notes and folders, move notes into folders, and opening notes and folders. He also worked on editing and saving notes. 
+- Charles will finish requirement #6, resetting password.
+- CJ will work on deleting notes and the ethical implications write-up.
+- Thy will update the README with how to run the project and upload a txt file with all the required libraries.
+- The whole team will work on commenting and documenting their code. 
