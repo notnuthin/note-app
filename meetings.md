@@ -58,4 +58,13 @@
 - Charles will finish requirement #6, resetting password.
 - CJ will work on deleting notes and the ethical implications write-up.
 - Thy will update the README with how to run the project and upload a txt file with all the required libraries.
-- The whole team will work on commenting and documenting their code. 
+- The whole team will work on commenting and documenting their code.
+
+### 2023-11-28 at 10:50
+- Anthony, Charles, CJ, Thy
+- Discussing completing Milestone 2, write-up. Also reviewed and merged Charles's code (20 min)
+- Discussing plans for Milestone 3 and completing the project. Talked about implementing remaining requirements. (30 min)
+- Thy will work on advanced search and starting the multilingual requirement.
+- Charles will work on creating a password protected folder and editing user profiles.
+- CJ will work on finishing delete notes, and may do save notes as pdf, etc. and deleting account
+- Anthony will help Thy with the multilingual requirement and CJ with completing the remaining ones. 
