@@ -168,11 +168,10 @@ def reset_password(user_id):
     #TODO: Code password reset
     form = ResetPassword()
     if form.validate_on_submit():
-        #found_user = User.query.filter_by(id=user_id).first()
         found_user = User.query.get(user_id)
         print("User is found")
         if found_user:
-            found_user.password = form.password.data
+            found_user.set_password(form.password.data)
             db.session.commit()
             print("Password Committed to DB")
             return redirect('/login')
