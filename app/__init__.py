@@ -3,8 +3,22 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_mail import Mail 
 
 app_obj = Flask(__name__)
+
+#Adding email 
+app_obj.config['SECRET_KEY'] = "cool_and_safe_secret_key" #No clue why we need this, the tutorial says so
+app_obj.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app_obj.config['MAIL_PORT'] = 465  #Use port 465 for secure SSL/TLS
+app_obj.config['MAIL_USE_TLS'] = False
+app_obj.config['MAIL_USE_SSL'] = True  #Use SSL for secure connection
+app_obj.config['MAIL_USERNAME'] = 'easynotes131@gmail.com'
+app_obj.config['MAIL_PASSWORD'] = 'ozpgzwxnteijbkmc'
+app_obj.config['MAIL_DEFAULT_SENDER'] = 'your_email@example.com'
+
+mail = Mail(app_obj) 
+#...
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -26,10 +40,10 @@ from .main import main as main_blueprint
 app_obj.register_blueprint(main_blueprint)
 
 #Was commented out
-with app_obj.app_context():
-     from app.models import User, Note, Folder
-     db.drop_all() #this command deletes the tables so you can add new ones
-     db.create_all()
+#with app_obj.app_context():
+     #from app.models import User, Note, Folder
+     #db.drop_all() #this command deletes the tables so you can add new ones
+     #db.create_all()
 
 
 login_manager = LoginManager(app_obj)

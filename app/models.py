@@ -8,6 +8,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable = False)
     email = db.Column(db.String, nullable = False)
+    vercode = db.Column(db.String, nullable=True) #Verification code column, can be null
     notes = db.relationship('Note', backref = 'author', lazy = 'dynamic')
     folders = db.relationship('Folder', backref = 'author', lazy = 'dynamic')
     

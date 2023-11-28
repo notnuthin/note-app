@@ -1,8 +1,11 @@
-from flask import render_template, redirect, flash, request, Blueprint, jsonify
-from .forms import LoginForm, CreateAccountForm, CreateFolderForm
-from app import app_obj, db
+from flask import render_template, redirect, flash, request, Blueprint, jsonify, url_for
+from .forms import LoginForm, CreateAccountForm, CreateFolderForm, VerificationForm, ResetPassword, SendEmailCode
+from app import app_obj, db, mail
 from .models import User, Note, Folder
 from flask_login import current_user, login_user, logout_user, login_required
+from flask_mail import Message
+import random
+import string
 
 main = Blueprint('main', __name__)
 
@@ -123,3 +126,59 @@ def note_page(note_id):
     note = Note.query.filter_by(id=note_id).first()
     # Render the note page template with note info
     return render_template('note_page.html', note=note)
+
+def generate_verify_code():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)) #Generates a random verification code
+
+@app_obj.route("/send_code", methods = ['GET', 'POST'])
+def send_verify_code():
+    form = SendEmailCode()
+    if form.validate_on_submit():
+        found_user = User.query.filter_by(email=form.email.data).first() #Verifies user if email is found
+        if found_user:
+            code = generate_verify_code()
+            found_user.vercode = code
+            db.session.commit()
+            #TODO: Code to send mail
+            subject = 'Verification Code'
+            body = f'Your verification code is: {code}'
+            recipient = form.email.data
+            message = Message(subject=subject, recipients=[recipient], body=body)
+            mail.send(message)
+            #...
+            return redirect('/verify')
+    return render_template("send_code.html", form=form)
+
+@app_obj.route("/verify", methods = ['GET', 'POST'])
+def verify():
+    form = VerificationForm()
+    if form.validate_on_submit():
+        #TODO: Write code to verify user's code stored in database
+        found_user = User.query.filter_by(vercode=form.code.data).first() #Finds user with the code
+        if found_user:
+            return redirect(url_for('reset_password', user_id=found_user.id)) #user_id is added as param
+        else:
+            flash('Incorrect code.')
+            return redirect('/send_code')
+        #...
+    return render_template("verify.html", form=form)
+
+@app_obj.route("/reset_password/<int:user_id>", methods = ['GET', 'POST'])
+def reset_password(user_id):
+    #TODO: Code password reset
+    form = ResetPassword()
+    if form.validate_on_submit():
+        #found_user = User.query.filter_by(id=user_id).first()
+        found_user = User.query.get(user_id)
+        print("User is found")
+        if found_user:
+            found_user.password = form.password.data
+            db.session.commit()
+            print("Password Committed to DB")
+            return redirect('/login')
+        else:
+            print("User is not found")
+            flash('User ID not found')
+            return redirect('/')
+    return render_template("reset_password.html", form=form)
+    #...

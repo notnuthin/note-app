@@ -1,10 +1,22 @@
+#from flask import render_template
+#from .forms import LoginForm, CreateAccountForm, CreateFolderForm
+#from app import app_obj, db, mail
+#from flask import render_template
+#from flask import redirect
+#from flask import flash, request, jsonify
+#from .models import User, Note, Folder
+#import time
+
 from flask import render_template
-from .forms import LoginForm, CreateAccountForm, CreateFolderForm
-from app import app_obj, db
+from .forms import LoginForm, CreateAccountForm, CreateFolderForm, VerificationForm, SendEmail, ResetPassword
+from app import app_obj, db, mail
 from flask import render_template
-from flask import redirect
-from flask import flash, request, jsonify
-from .models import User, Note, Folder
+from flask import redirect, url_for, request
+from flask import flash
+from flask_mail import Message
+from .models import User
+import random
+import string
 import time
 
 @app_obj.route("/")
