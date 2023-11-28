@@ -1,9 +1,10 @@
 from flask import render_template, redirect, flash, request, Blueprint, jsonify, url_for
 from .forms import LoginForm, CreateAccountForm, CreateFolderForm, VerificationForm, ResetPassword, SendEmailCode
-from app import app_obj, db, mail
+from app import app_obj, db, mail, serializer, BadSignature
 from .models import User, Note, Folder
 from flask_login import current_user, login_user, logout_user, login_required
 from flask_mail import Message
+from itsdangerous import URLSafeTimedSerializer, BadSignature
 import random
 import string
 
@@ -136,12 +137,11 @@ def send_verify_code():
     if form.validate_on_submit():
         found_user = User.query.filter_by(email=form.email.data).first() #Verifies user if email is found
         if found_user:
-            code = generate_verify_code()
-            found_user.vercode = code
-            db.session.commit()
-            #TODO: Code to send mail
+            token = serializer.dumps({'user_id': found_user.id})
+            reset_url = url_for('reset_password', user_id=found_user.id, token=token, _external=True)
+
             subject = 'Verification Code'
-            body = f'Your verification code is: {code}'
+            body = f'Click the following link to reset your password: {reset_url}'
             recipient = form.email.data
             message = Message(subject=subject, recipients=[recipient], body=body)
             mail.send(message)
@@ -151,33 +151,28 @@ def send_verify_code():
 
 @app_obj.route("/verify", methods = ['GET', 'POST'])
 def verify():
-    form = VerificationForm()
-    if form.validate_on_submit():
-        #TODO: Write code to verify user's code stored in database
-        found_user = User.query.filter_by(vercode=form.code.data).first() #Finds user with the code
-        if found_user:
-            return redirect(url_for('reset_password', user_id=found_user.id)) #user_id is added as param
-        else:
-            flash('Incorrect code.')
-            return redirect('/send_code')
-        #...
-    return render_template("verify.html", form=form)
+    return render_template("verify.html")
 
-@app_obj.route("/reset_password/<int:user_id>", methods = ['GET', 'POST'])
-def reset_password(user_id):
+@app_obj.route("/reset_password/<token>", methods = ['GET', 'POST'])
+def reset_password(token):
     #TODO: Code password reset
+    try:
+        data = serializer.loads(token, max_age=3600)  # Adjust max_age as needed
+        user_id = data.get('user_id')
+        found_user = User.query.get(user_id)
+    except BadSignature:
+        flash('Invalid or expired reset token.')
+        return redirect('/')
+
     form = ResetPassword()
     if form.validate_on_submit():
-        found_user = User.query.get(user_id)
-        print("User is found")
         if found_user:
             found_user.set_password(form.password.data)
             db.session.commit()
-            print("Password Committed to DB")
+            flash('Password reset successfully. You can now log in with your new password.')
             return redirect('/login')
         else:
-            print("User is not found")
-            flash('User ID not found')
+            flash('User not found.')
             return redirect('/')
     return render_template("reset_password.html", form=form)
     #...

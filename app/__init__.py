@@ -4,6 +4,7 @@ import os
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail 
+from itsdangerous import URLSafeTimedSerializer, BadSignature
 
 app_obj = Flask(__name__)
 
@@ -20,6 +21,7 @@ app_obj.config['MAIL_DEFAULT_SENDER'] = 'your_email@example.com'
 mail = Mail(app_obj) 
 #...
 
+serializer = URLSafeTimedSerializer(app_obj.config['SECRET_KEY'])
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app_obj.static_folder = 'static'
