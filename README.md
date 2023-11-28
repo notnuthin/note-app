@@ -21,7 +21,7 @@
 2. Log in after you're signed up
    <img width="1280" alt="login_page" src="https://github.com/notnuthin/note-app/assets/96977067/bc72f3b3-680c-4795-a5a2-164a7f32deb9">
 3. Start creating notes and folders to store them
-  
+   <img width="1280" alt="homepage" src="https://github.com/notnuthin/note-app/assets/96977067/455fc697-93d5-4752-b6dc-e1aa7ecdfa2f">
 
 # Completed Functional Requirements
 1. Sign Up (Thy)
