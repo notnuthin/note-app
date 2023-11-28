@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/homepage_style.css') }}">
+    <script src = "{{url_for('static', filename = 'js/homepage.js')}}"></script>
 </head>
 <body>
     <!-- The header for the homepage -->
@@ -9,7 +10,8 @@
             Easy Notes
         </div>
         <div id="searchBar">
-            Search
+                <input type= "text" id = "searchInput" placeholder="Search..">
+                <button onclick= "submit()" id = "searchButton">search</button>
         </div>
             <div id = "profile">
                 Picture Here
