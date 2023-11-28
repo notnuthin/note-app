@@ -1,8 +1,12 @@
-from flask import render_template, redirect, flash, request, Blueprint, jsonify
-from .forms import LoginForm, CreateAccountForm, CreateFolderForm
-from app import app_obj, db
+from flask import render_template, redirect, flash, request, Blueprint, jsonify, url_for
+from .forms import LoginForm, CreateAccountForm, CreateFolderForm, VerificationForm, ResetPassword, SendEmailCode
+from app import app_obj, db, mail, serializer, BadSignature
 from .models import User, Note, Folder
 from flask_login import current_user, login_user, logout_user, login_required
+from flask_mail import Message
+from itsdangerous import URLSafeTimedSerializer, BadSignature
+import random
+import string
 
 main = Blueprint('main', __name__)
 
@@ -123,3 +127,52 @@ def note_page(note_id):
     note = Note.query.filter_by(id=note_id).first()
     # Render the note page template with note info
     return render_template('note_page.html', note=note)
+
+def generate_verify_code():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)) #Generates a random verification code
+
+@app_obj.route("/send_code", methods = ['GET', 'POST'])
+def send_verify_code():
+    form = SendEmailCode()
+    if form.validate_on_submit():
+        found_user = User.query.filter_by(email=form.email.data).first() #Verifies user if email is found
+        if found_user:
+            token = serializer.dumps({'user_id': found_user.id})
+            reset_url = url_for('reset_password', user_id=found_user.id, token=token, _external=True)
+
+            subject = 'Verification Code'
+            body = f'Click the following link to reset your password: {reset_url}'
+            recipient = form.email.data
+            message = Message(subject=subject, recipients=[recipient], body=body)
+            mail.send(message)
+            #...
+            return redirect('/verify')
+    return render_template("send_code.html", form=form)
+
+@app_obj.route("/verify", methods = ['GET', 'POST'])
+def verify():
+    return render_template("verify.html")
+
+@app_obj.route("/reset_password/<token>", methods = ['GET', 'POST'])
+def reset_password(token):
+    #TODO: Code password reset
+    try:
+        data = serializer.loads(token, max_age=3600)  # Adjust max_age as needed
+        user_id = data.get('user_id')
+        found_user = User.query.get(user_id)
+    except BadSignature:
+        flash('Invalid or expired reset token.')
+        return redirect('/')
+
+    form = ResetPassword()
+    if form.validate_on_submit():
+        if found_user:
+            found_user.set_password(form.password.data)
+            db.session.commit()
+            flash('Password reset successfully. You can now log in with your new password.')
+            return redirect('/login')
+        else:
+            flash('User not found.')
+            return redirect('/')
+    return render_template("reset_password.html", form=form)
+    #...
