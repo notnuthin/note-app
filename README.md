@@ -25,9 +25,12 @@
 
 # Completed Functional Requirements
 1. Sign Up (Thy)
-2. Login (Thy)
-3. Logout (Thy)
-4. Create a Note / Folder (Anthony)
-5. Move notes into different categories / folders (Anthony)
-6. Open Notes and Folders (Anthony)
+4. Login (Thy)
+5. Logout (Thy)
+6. Reset Password (Charles)
 7. Edit and Save Notes (Anthony)
+8. Create a Note / Folder (Anthony)
+9. Move notes into different categories / folders (Anthony)
+12. Open Notes and Folders (Anthony)
+14. Delete Notes (CJ)
+
