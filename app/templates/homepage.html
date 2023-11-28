@@ -46,9 +46,11 @@
         <div id="header2">
             Notes
         </div>
-
+       
         <!-- Button for moving notes to folder -->
         <button onclick="showCustomPrompt()">Move Selected Notes to Folder</button>
+         <!-- Button for deleting notes -->
+         <button onclick="deleteSelectedNotes()">Delete Selected Notes</button>
         <!-- overlay and modal for the folder dropdown -->
         <div class="overlay" id="customPromptOverlay">
             <!-- Pop-up for when you click the button -->
@@ -276,7 +278,33 @@
                 xhr.send(JSON.stringify({data: note}));
             }
         }
-
-
+        // function to delete notes
+    function deleteSelectedNotes() {
+        // getting selected notes
+        const selectedNoteIds = Array.from(selectedNotes);
+        // sending a fetch request to /delete_notes to delete the notes
+        fetch('/delete_notes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                note_ids: selectedNoteIds,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Handle success, e.g., update UI, refresh note list, etc.
+                console.log('Notes deleted successfully');
+            } else {
+                // Handle failure, e.g., display error message
+                console.error('Failed to delete notes:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
     </script>
 </body>
