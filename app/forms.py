@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
+import email_validator
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -19,3 +20,17 @@ class CreateAccountForm(FlaskForm):
 class CreateFolderForm(FlaskForm):
     name = StringField('Untitled', validators=[DataRequired()])
     submit = SubmitField('Make Folder')
+
+class VerificationForm(FlaskForm):
+    code = StringField('Verification', validators=[DataRequired()])
+    submit = SubmitField('Verify')
+
+class SendEmailCode(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+    submit = SubmitField('Send Email')
+
+class ResetPassword(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('Password',validators=[DataRequired(), EqualTo('confirm', message='Passwords must match')])
+    confirm  = PasswordField('Repeat Password')
+    submit = SubmitField('Change Password')

@@ -21,13 +21,16 @@
 2. Log in after you're signed up
    <img width="1280" alt="login_page" src="https://github.com/notnuthin/note-app/assets/96977067/bc72f3b3-680c-4795-a5a2-164a7f32deb9">
 3. Start creating notes and folders to store them
-  
+   <img width="1280" alt="homepage" src="https://github.com/notnuthin/note-app/assets/96977067/455fc697-93d5-4752-b6dc-e1aa7ecdfa2f">
 
 # Completed Functional Requirements
 1. Sign Up (Thy)
-2. Login (Thy)
-3. Logout (Thy)
-4. Create a Note / Folder (Anthony)
-5. Move notes into different categories / folders (Anthony)
-6. Open Notes and Folders (Anthony)
+4. Login (Thy)
+5. Logout (Thy)
+6. Reset Password (Charles)
 7. Edit and Save Notes (Anthony)
+8. Create a Note / Folder (Anthony)
+9. Move notes into different categories / folders (Anthony)
+12. Open Notes and Folders (Anthony)
+14. Delete Notes (CJ)
+
