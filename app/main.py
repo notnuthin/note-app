@@ -128,6 +128,24 @@ def note_page(note_id):
     # Render the note page template with note info
     return render_template('note_page.html', note=note)
 
+
+@app_obj.route('/delete_notes', methods=['POST'])
+def delete_notes():
+    try:
+        data = request.json
+        note_ids = data.get('note_ids', [])
+
+        # Assuming Note is your SQLAlchemy model
+        for note_id in note_ids:
+            note = Note.query.get(note_id)
+            if note:
+                db.session.delete(note)
+
+        db.session.commit()
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+      
 def generate_verify_code():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)) #Generates a random verification code
 
