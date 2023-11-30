@@ -34,3 +34,9 @@
 12. Open Notes and Folders (Anthony)
 14. Delete Notes (CJ)
 
+# Resources 
+ChatGPT 
+https://www.digitalocean.com/community/tutorials/how-to-add-authentication-to-your-app-with-flask-login 
+https://blog.miguelgrinberg.com/post/how-to-add-flask-migrate-to-an-existing-project 
+https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application#step-3-displaying-all-records
+https://itsdangerous.palletsprojects.com/en/2.1.x/
