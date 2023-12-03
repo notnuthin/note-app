@@ -20,23 +20,6 @@ app_obj.config['MAIL_PASSWORD'] = 'ozpgzwxnteijbkmc'
 app_obj.config['MAIL_DEFAULT_SENDER'] = 'your_email@example.com'
 
 mail = Mail(app_obj) 
-#Function to find where wkhtmltopdf is located on the user's computer
-def find_wkhtmltopdf():
-    possible_paths = [
-        '/usr/bin/wkhtmltopdf',
-        '/usr/local/bin/wkhtmltopdf',
-        '/opt/wkhtmltopdf/bin/wkhtmltopdf',
-        'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe',
-    ]
-
-    for path in possible_paths:
-        if shutil.which(path):
-            return path
-
-    return None
-
-app_obj.config['WKHTMLTOPDF_PATH'] = find_wkhtmltopdf()
-
 
 serializer = URLSafeTimedSerializer(app_obj.config['SECRET_KEY'])
 basedir = os.path.abspath(os.path.dirname(__file__))
