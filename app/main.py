@@ -132,8 +132,6 @@ def get_notes(folder_id):
                 return jsonify({'error': 'PIN code is required for password-protected folder'}), 403
             hashed_pin_code = generate_password_hash(pin_code)
             print(f"Received PIN code: {pin_code}")
-            print(f"Received pin_code hashed: {hashed_pin_code}")
-            print(f"Stored hashed PIN code: {folder.pin_code}")
             if folder.pin_code is None or not check_password_hash(folder.pin_code, pin_code):
                 print("Incorrect PIN code")
                 return jsonify({'error': 'Incorrect PIN code'}), 403

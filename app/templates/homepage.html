@@ -77,12 +77,14 @@
 
             <!-- For loop for displaying each note -->
             {% for note in notes %}
+            {% if note.folder_id is none or not note.folder.is_password_protected%} 
             <form onsubmit="return false;">
                 <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')" ondblclick="openNote('{{note.id}}')">
                     <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
                 </button>
                 {{note.name}}
             </form>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
