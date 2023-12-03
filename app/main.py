@@ -125,6 +125,13 @@ def get_notes(folder_id):
     folder = Folder.query.filter_by(id=folder_id).first()
     # Returns the notes as an array of dictionaries for displaying
     if folder:
+        if folder.is_password_protected:
+            # Prompt the user for PIN code
+            pin_code = request.args.get('pin_code')
+            
+            # Verify the PIN code
+            if not check_password_hash(folder.pin_code, pin_code):
+                return jsonify({'error': 'Incorrect PIN code'}), 403
         notes = [{'id': note.id, 'name': note.name} for note in folder.notes]
         return jsonify(notes)
     else:
