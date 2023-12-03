@@ -6,6 +6,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, BadSignature
 from io import BytesIO
+from werkzeug.security import generate_password_hash, check_password_hash
 import random
 import string
 from docx import Document
@@ -34,9 +35,14 @@ def process_data():
     # get data from function, which should be the inputted folder name
     data = request.get_json()
     user_input = data.get('data')
+    is_password_protected = data.get('is_password_protected', False)
+    pin_code = data.get('pin_code')
     print("User input:", user_input)
     # make a folder with that information and save it
     f = Folder(name = user_input, user_id = current_user.id)
+    if is_password_protected:
+        f.is_password_protected = True
+        f.pin_code = generate_password_hash(pin_code)
     db.session.add(f)
     db.session.commit()
     print("user added folder named ")
@@ -63,7 +69,7 @@ def new_note():
 @app_obj.route('/updateDatabase', methods=['POST'])
 def update_database():
     try:
-        #gets data from the post request
+        # gets data from the post request
         data = request.json
         selected_folder_id = data.get('selectedFolder')
         selected_notes_ids = data.get('selectedNotes')
@@ -117,6 +123,13 @@ def get_notes(folder_id):
     folder = Folder.query.filter_by(id=folder_id).first()
     # Returns the notes as an array of dictionaries for displaying
     if folder:
+        if folder.is_password_protected:
+            # Prompt the user for PIN code
+            pin_code = request.args.get('pin_code')
+            
+            # Verify the PIN code
+            if not check_password_hash(folder.pin_code, pin_code):
+                return jsonify({'error': 'Incorrect PIN code'}), 403
         notes = [{'id': note.id, 'name': note.name} for note in folder.notes]
         return jsonify(notes)
     else:

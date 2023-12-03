@@ -235,6 +235,16 @@
             }
             else
             {
+                // Checks if the folder should be password-protected
+                const isPasswordProtected = confirm("Do you want to password-protect this folder?");
+                let pinCode = "";
+
+                // If password-protected, prompt for the PIN code
+                if (isPasswordProtected) {
+                    pinCode = prompt("Please enter a 4-digit PIN code");
+                    // Add additional validation for the PIN code if needed
+                }
+
                 //sending the folder name to the /new_folder route via xhr
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "/new_folder", true);
@@ -249,7 +259,7 @@
                     }
                 }
                 };
-                xhr.send(JSON.stringify({data: folder}));
+                xhr.send(JSON.stringify({ data: folder, is_password_protected: isPasswordProtected, pin_code: pinCode }));
             }
         }
 

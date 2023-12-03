@@ -19,6 +19,8 @@ class CreateAccountForm(FlaskForm):
 
 class CreateFolderForm(FlaskForm):
     name = StringField('Untitled', validators=[DataRequired()])
+    is_password_protected = BooleanField('Password Protect Folder')
+    pin_code = StringField('PIN Code', validators=[Optional(), Length(4, 4, "PIN code must be 4 characters")])
     submit = SubmitField('Make Folder')
 
 class VerificationForm(FlaskForm):
