@@ -32,7 +32,7 @@ Sign Up
 <br>
 
 ## Non-functional Requirements
-1. Multilingual support
+1. Website adjusts to window size
 2. Only expected to work on Google Chrome
 
 ## Use Cases 
