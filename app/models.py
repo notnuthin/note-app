@@ -35,6 +35,9 @@ class Folder(db.Model):
     notes = db.relationship('Note', back_populates='folder')
     is_password_protected = db.Column(db.Boolean, default=False) 
     pin_code = db.Column(db.String, nullable=True) #Will have pincode if password protected
+
+    def check_code(self, pin_code):
+        return check_password_hash(self.pin_code, pin_code)
     
 
     
