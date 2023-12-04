@@ -8,7 +8,6 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable = False)
     email = db.Column(db.String, nullable = False)
-    vercode = db.Column(db.String, nullable=True) #Verification code column, can be null
     notes = db.relationship('Note', backref = 'author', lazy = 'dynamic')
     folders = db.relationship('Folder', backref = 'author', lazy = 'dynamic')
     
@@ -34,6 +33,11 @@ class Folder(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     name = db.Column(db.String, nullable=False)
     notes = db.relationship('Note', back_populates='folder')
+    is_password_protected = db.Column(db.Boolean, default=False) 
+    pin_code = db.Column(db.String, nullable=True) #Will have pincode if password protected
+
+    def check_code(self, pin_code):
+        return check_password_hash(self.pin_code, pin_code)
     
 
     
