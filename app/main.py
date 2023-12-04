@@ -7,10 +7,10 @@ from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, BadSignature
 from werkzeug.security import generate_password_hash, check_password_hash
 from io import BytesIO
+from werkzeug.security import generate_password_hash, check_password_hash
 import random
 import string
 from docx import Document
-from flask_weasyprint import HTML, render_pdf
 
 main = Blueprint('main', __name__)
 
@@ -253,3 +253,17 @@ def export_notes(output_format):
     except Exception as e:
         # Return an error response
         return jsonify({'success': False, 'error': str(e)}), 500
+
+#TODO: Add Profile page route. Read requirement
+# This method is used to call user_profile method, this initalizes user's id.
+@login_required
+@app_obj.route('/profile', methods=['GET', 'POST'])
+def profile():
+    print("Route working")
+    print("User id is: ", current_user.id)
+    return redirect(url_for('user_profile', user_id=current_user.id))
+@login_required
+@app_obj.route('/user_profile/<int:user_id>', methods=['GET', 'POST'])
+def user_profile(user_id):
+    print("Route working")
+    return render_template("profile.html", user_id=user_id)
