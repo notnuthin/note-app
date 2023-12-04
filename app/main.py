@@ -7,10 +7,10 @@ from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, BadSignature
 from werkzeug.security import generate_password_hash, check_password_hash
 from io import BytesIO
-from werkzeug.security import generate_password_hash, check_password_hash
 import random
 import string
 from docx import Document
+#from flask_weasyprint import HTML, render_pdf
 
 main = Blueprint('main', __name__)
 
