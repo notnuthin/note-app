@@ -1,4 +1,4 @@
-from flask import render_template, redirect, flash, request, Blueprint, jsonify, url_for
+from flask import render_template, redirect, flash, make_response, request, Blueprint, jsonify, url_for, send_file
 from .forms import LoginForm, CreateAccountForm, CreateFolderForm, VerificationForm, ResetPassword, SendEmailCode
 from app import app_obj, db, mail, serializer, BadSignature
 from .models import User, Note, Folder
@@ -6,8 +6,11 @@ from flask_login import current_user, login_user, logout_user, login_required
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, BadSignature
 from werkzeug.security import generate_password_hash, check_password_hash
+from io import BytesIO
 import random
 import string
+from docx import Document
+from flask_weasyprint import HTML, render_pdf
 
 main = Blueprint('main', __name__)
 
@@ -211,4 +214,42 @@ def reset_password(token):
             flash('User not found.')
             return redirect('/')
     return render_template("reset_password.html", form=form)
-    #...
+
+# Route to export notes in various formats
+@app_obj.route('/export/<output_format>', methods=['POST'])
+def export_notes(output_format):
+    try:
+        data = request.json
+        note_content = data.get('note_content')
+        print(note_content)
+
+        # Check if note content is empty
+        if not note_content:
+            raise RuntimeError("Empty note content")
+
+        if output_format == 'pdf':
+            # Use WeasyPrint for PDF conversion
+            html_content = f"<pre>{note_content}</pre>"
+            pdf = HTML(string=html_content).write_pdf()
+            response = make_response(pdf)
+            response.headers['Content-Type'] = 'application/pdf'
+            response.headers['Content-Disposition'] = 'attachment; filename=temp_note.pdf'
+        elif output_format == 'docx':
+            # Use python-docx for docx conversion
+            doc = Document()
+            doc.add_paragraph(note_content)
+            docx_output = BytesIO()
+            doc.save(docx_output)
+            docx_output.seek(0)
+            response = send_file(docx_output, as_attachment=True, download_name='temp_note.docx', mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+        else:
+            # Send plain text back
+            response = make_response(note_content)
+            response.headers['Content-Type'] = 'text/plain'
+            response.headers['Content-Disposition'] = 'attachment; filename=temp_note.txt'
+
+        return response
+
+    except Exception as e:
+        # Return an error response
+        return jsonify({'success': False, 'error': str(e)}), 500
