@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo
+from wtforms.validators import DataRequired, Email, EqualTo, Optional, Length
 import email_validator
 
 class LoginForm(FlaskForm):
@@ -19,6 +19,8 @@ class CreateAccountForm(FlaskForm):
 
 class CreateFolderForm(FlaskForm):
     name = StringField('Untitled', validators=[DataRequired()])
+    is_password_protected = BooleanField('Password Protect Folder')
+    pin_code = StringField('PIN Code', validators=[Optional(), Length(4, 4, "PIN code must be 4 characters")])
     submit = SubmitField('Make Folder')
 
 class VerificationForm(FlaskForm):

@@ -77,12 +77,14 @@
 
             <!-- For loop for displaying each note -->
             {% for note in notes %}
+            {% if note.folder_id is none or not note.folder.is_password_protected%} 
             <form onsubmit="return false;">
                 <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')" ondblclick="openNote('{{note.id}}')">
                     <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
                 </button>
                 {{note.name}}
             </form>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -107,53 +109,70 @@
 
         //Function for opening folder
         function openFolder(folderId) {
-            //Taking main page off of display and making note area visible
+            // Taking main page off of display and making note area visible
             const notesArea = document.getElementById('notesArea');
             notesArea.classList.toggle('invisible');
             const mainPage = document.getElementById('mainPage');
             mainPage.classList.toggle('invisible');
 
-            //fetch request to get the notes for the folder being opened
+            // fetch request to get the notes for the folder being opened
             fetch(`/get_notes/${folderId}`)
-                .then(response => response.json())
-                .then(notes => {
-                    const notesContainer = document.getElementById('notesContainer');
-                    
-                    // Clear previous notes
-                    notesContainer.innerHTML = '';
+            .then(response => response.json())
+            .then(notes => {
+            const notesContainer = document.getElementById('notesContainer');
 
-                    // Create and append note elements to container
-                    notes.forEach(note => {
-                        const form = document.createElement('form');
-                        form.onsubmit = () => false;
+            // Clear previous notes
+            notesContainer.innerHTML = '';
 
-                        //Sets the functionality of the button for each note
-                        const button = document.createElement('button');
-                        button.className = 'transparentbutton notebutton';
-                        button.id = note["id"];
-                        button.onclick = () => toggleSelection(note["id"]);
-                        button.ondblclick = () => openNote(note["id"]);
+            // Check if the server response indicates a password-protected folder
+            if (notes.hasOwnProperty('error') && notes.error === 'PIN code is required for password-protected folder') {
+                // Prompt the user for a PIN code
+                const pinCode = prompt('Enter the PIN code for the folder:');
+                if (pinCode !== null) {
+                    // Retry fetching notes with the entered PIN code
+                    fetch(`/get_notes/${folderId}?pin_code=${pinCode}`)
+                        .then(response => response.json())
+                        .then(notes => displayNotes(notesContainer, notes))
+                        .catch(error => console.error('Error:', error));
+                }
+            } else {
+                // Display notes for non-password-protected folder
+                displayNotes(notesContainer, notes);
+            }
+            })
+            .catch(error => {
+            console.error('Error:', error);
+            });
+        }
+        function displayNotes(container, notes) {
+        // Create and append note elements to container
+        notes.forEach(note => {
+            const form = document.createElement('form');
+            form.onsubmit = () => false;
 
-                        //Creating the image for each note
-                        const img = document.createElement('img');
-                        img.src = '{{ url_for("static", filename="smallNote.jpg") }}';
-                        img.alt = 'Note Image';
+            // Sets the functionality of the button for each note
+            const button = document.createElement('button');
+            button.className = 'transparentbutton notebutton';
+            button.id = note["id"];
+            button.onclick = () => toggleSelection(note["id"]);
+            button.ondblclick = () => openNote(note["id"]);
 
-                        //Displaying the name of each note
-                        const noteName = document.createTextNode(note["name"]);
+            // Creating the image for each note
+            const img = document.createElement('img');
+            img.src = '{{ url_for("static", filename="smallNote.jpg") }}';
+            img.alt = 'Note Image';
 
-                        //Adding that all to the form 
-                        button.appendChild(img);
-                        form.appendChild(button);
-                        form.appendChild(noteName);
+            // Displaying the name of each note
+            const noteName = document.createTextNode(note["name"]);
 
-                        //Adding the form to the container
-                        notesContainer.appendChild(form);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            // Adding that all to the form
+            button.appendChild(img);
+            form.appendChild(button);
+            form.appendChild(noteName);
+
+            // Adding the form to the container
+            container.appendChild(form);
+            });
         }
         
         // Keeps track of selected notes
@@ -235,13 +254,22 @@
             }
             else
             {
+                // Checks if the folder should be password-protected
+                const isPasswordProtected = confirm("Do you want to password-protect this folder?");
+                let pinCode = "";
+
+                // If password-protected, prompt for the PIN code
+                if (isPasswordProtected) {
+                    pinCode = prompt("Please enter a 4-digit PIN code");
+                }
+
                 //sending the folder name to the /new_folder route via xhr
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "/new_folder", true);
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    print(xhr.status)
+                    console.log(xhr.status)
                     if (xhr.status === 200) {
                         alert("Data sent successfully!");
                     } else {
@@ -249,7 +277,7 @@
                     }
                 }
                 };
-                xhr.send(JSON.stringify({data: folder}));
+                xhr.send(JSON.stringify({ data: folder, is_password_protected: isPasswordProtected, pin_code: pinCode }));
             }
         }
 
