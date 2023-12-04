@@ -10,8 +10,20 @@
             Easy Notes
         </div>
         <div id="searchBar">
+                <button id = "searchButton">search</button>
                 <input type= "text" id = "searchInput" placeholder="Search..">
-                <button onclick= "submit()" id = "searchButton">search</button>
+                <div class="search-dropdown">
+                    <ul id="searchResults"></ul>
+                </div>
+                <div id = "filter-container">
+                    Filter by folders:
+                    <select id="filter-dropdown">
+                        <option value = "All folders">All folder</option>
+                        {% for folder in folders %}
+                        <option value="{{folder.id}}">{{folder.name}}</option>
+                        {% endfor %}
+                </select>
+                </div>
         </div>
             <div id = "profile">
                 Picture Here
