@@ -278,6 +278,11 @@
                 }
                 };
                 xhr.send(JSON.stringify({ data: folder, is_password_protected: isPasswordProtected, pin_code: pinCode }));
+                //Makes sure that the page refreshes properly
+                if (isPasswordProtected) {
+                    alert("Click Ok");
+                }
+            
             }
         }
 
