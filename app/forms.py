@@ -43,3 +43,7 @@ class ProfileForm(FlaskForm):
     name = StringField('Name')
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Save Changes')
+
+class DeleteProfileForm(FlaskForm):
+    confirmation = StringField('Enter', validators=[DataRequired()])
+    submit = SubmitField('Delete Profile')

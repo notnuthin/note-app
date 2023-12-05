@@ -1,5 +1,5 @@
 from flask import render_template, redirect, flash, make_response, request, Blueprint, jsonify, url_for, send_file
-from .forms import LoginForm, CreateAccountForm, CreateFolderForm, VerificationForm, ResetPassword, SendEmailCode, ProfileForm
+from .forms import LoginForm, CreateAccountForm, CreateFolderForm, VerificationForm, ResetPassword, SendEmailCode, ProfileForm, DeleteProfileForm
 from app import app_obj, db, mail, serializer, BadSignature
 from .models import User, Note, Folder
 from flask_login import current_user, login_user, logout_user, login_required
@@ -270,6 +270,7 @@ def user_profile(user_id):
     form = ProfileForm()
     return render_template("profile.html", user_id=user_id, form=form)
 
+#This method updates the user profile
 @login_required
 @app_obj.route('/update_profile', methods=['POST'])
 def update_profile():
@@ -288,3 +289,26 @@ def update_profile():
             logout_user()  # Log out the user on incorrect password
             return redirect('/login')
     return render_template('profile.html', form=form)
+
+#TODO: Delete profile method
+@login_required
+@app_obj.route('/delete_profile', methods=['GET', 'POST'])
+def delete_profile():
+    form = DeleteProfileForm()
+    if form.validate():
+        if(form.confirmation.data == "DELETE"):
+            # Delete the user's notes
+            Note.query.filter_by(user_id=current_user.id).delete()
+            # Delete the user's folders
+            Folder.query.filter_by(user_id=current_user.id).delete()
+            # Delete the user and log them out
+            db.session.delete(current_user)
+            db.session.commit()
+            logout_user()
+            flash('Profile deleted successfully.')
+            return redirect('/signup')
+        else:
+            logout_user()
+            flash('Incorrect Validation')
+            return redirect('/login')
+    return render_template('delete_profile.html', form=form)
