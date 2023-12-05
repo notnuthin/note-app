@@ -36,3 +36,14 @@ class ResetPassword(FlaskForm):
     password = PasswordField('Password',validators=[DataRequired(), EqualTo('confirm', message='Passwords must match')])
     confirm  = PasswordField('Repeat Password')
     submit = SubmitField('Change Password')
+
+class ProfileForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    name = StringField('Name')
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Save Changes')
+
+class DeleteProfileForm(FlaskForm):
+    confirmation = StringField('Enter', validators=[DataRequired()])
+    submit = SubmitField('Delete Profile')

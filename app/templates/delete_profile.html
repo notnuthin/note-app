@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="block_in_middle_of_screen">
+        <h1>Are you sure? Please enter DELETE to remove your profile.</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.confirmation.label }} <br> 
+            {{ form.confirmation() }} <br>
+            {{ form.submit() }}
+        </form>
+    </div>
+{% endblock %}
