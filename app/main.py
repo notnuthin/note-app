@@ -129,13 +129,18 @@ def note_page(note_id):
 @login_required
 @main.route('/search', methods = ['GET'])
 def search():
+    results = []
     search_expression = request.args.get('search_expression')
+    filter = request.args.get('folder')
     print(search_expression)
-    note = Note.query.filter_by(name = search_expression).first()
-    #print(note.id)
-    if note is None:
+    print(filter)
+    if filter == "All folders":
+        notes = Note.query.filter_by(name = search_expression).all()
+    else:
+        notes = Note.query.filter_by(name=search_expression, id =filter).all()
+    if notes is None:
         return {"result": None}
     else:
-        redirect_url = url_for('main.note_page', note_id=note.id)
-        print(f"Redirect URL: {redirect_url}")  # Add this line for debugging
-        return {"result": redirect_url}
+        for note in notes:
+            results.append({'name': note.name, 'url': url_for('main.note_page', note_id=note.id)})
+    return {"results": results}

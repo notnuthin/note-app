@@ -10,16 +10,20 @@
             Easy Notes
         </div>
         <div id="searchBar">
-            <button onclick= "submit()" id = "searchButton">search</button>
-            <input type= "text" id = "searchInput" placeholder="Search..">
-            <div class="filter-container">
-                <button onclick="toggleDropdown()" class="filter-button">Filter</button>
-                <div id="folderDropdown" class="folder-dropdown-content">
-                    {% for folder in folders %}
-                    <option value="{{folder.id}}">{{folder.name}}</option>
-                    {% endfor %}
+                <button id = "searchButton">search</button>
+                <input type= "text" id = "searchInput" placeholder="Search..">
+                <div class="search-dropdown">
+                    <ul id="searchResults"></ul>
                 </div>
-            </div>  
+                <div id = "filter-container">
+                    Filter by folders:
+                    <select id="filter-dropdown">
+                        <option value = "All folders">All folder</option>
+                        {% for folder in folders %}
+                        <option value="{{folder.id}}">{{folder.name}}</option>
+                        {% endfor %}
+                </select>
+                </div>
         </div>
             <div id = "profile">
                 Picture Here
