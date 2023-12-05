@@ -44,6 +44,9 @@
                 <button class="transparentbutton" onclick="submit()">
                     <img src="{{url_for('static', filename ='plus.png')}}"  alt="Folder Image">
                 </button>
+                <div class="caption">
+                    Create a Folder
+                </div>
             </form>
             <!-- For Loop making an picture button for each folder -->
             {% for folder in folders %}
@@ -51,7 +54,9 @@
                 <button class="transparentbutton folderbutton" id="{{folder.id}}" onclick="openFolder({{folder.id}})">
                     <img src="{{url_for('static', filename ='Foldersmall.png')}}"  alt="Folder Image">
                 </button>
-                {{folder.name}}
+                <div class="caption">
+                    {{folder.name}}
+                </div>
             </form>
             {% endfor %}
         </div>
@@ -88,7 +93,7 @@
                     <img src="{{url_for('static', filename ='plus.png')}}"  alt="Note Image">
                 </button>
                 <div class="caption">
-                    New Note
+                    Create a Note
                 </div>
             </form>
 
