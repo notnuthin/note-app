@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/homepage_style.css') }}">
+    <script src = "{{url_for('static', filename = 'js/homepage.js')}}"></script>
 </head>
 <body>
     <!-- The header for the homepage -->
@@ -9,7 +10,20 @@
             Easy Notes
         </div>
         <div id="searchBar">
-            Search
+                <button id = "searchButton">search</button>
+                <input type= "text" id = "searchInput" placeholder="Search..">
+                <div class="search-dropdown">
+                    <ul id="searchResults"></ul>
+                </div>
+                <div id = "filter-container">
+                    Filter by folders:
+                    <select id="filter-dropdown">
+                        <option value = "All folders">All folder</option>
+                        {% for folder in folders %}
+                        <option value="{{folder.id}}">{{folder.name}}</option>
+                        {% endfor %}
+                </select>
+                </div>
         </div>
             <div id = "profile">
                 <a href="{{ url_for('profile') }}">Your Profile</a>
