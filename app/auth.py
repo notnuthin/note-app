@@ -35,7 +35,7 @@ def signup():
             if user:
                 flash('Email address already exists')
                 return redirect(url_for('auth.signup'))
-            u = User(username=form.username.data, email=form.email.data)
+            u = User(username=form.username.data, email=form.email.data, name=form.name.data)
             u.set_password(form.password.data)
             db.session.add(u)
             db.session.commit()
