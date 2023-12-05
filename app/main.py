@@ -10,7 +10,7 @@ from io import BytesIO
 import random
 import string
 from docx import Document
-#from flask_weasyprint import HTML, render_pdf
+from flask_weasyprint import HTML, render_pdf
 
 main = Blueprint('main', __name__)
 
