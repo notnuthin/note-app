@@ -32,11 +32,11 @@ Sign Up
 <br>
 
 ## Non-functional Requirements
-1. Multilingual support
+1. Website adjusts to window size
 2. Only expected to work on Google Chrome
 
 ## Use Cases 
-1. Sign Up (Thy)
+### 1. Sign Up (Thy)
 - **Pre-condition:** The user is on the webpage
 - **Trigger:** The user hit the sign up button
 - **Primary Sequence:**
@@ -65,11 +65,11 @@ Sign Up
 
 <br>
 
-2. Edit User Profile (Anthony)
+### 2. Edit User Profile (Anthony)
 - **Pre-condition:** The user is logged in.
 - **Trigger:** The user clicks the “edit profile” button in the profile page.
 - **Primary Sequence:**
-1. The user makes changes to their biography or uploads a new profile picture.
+1. The user makes changes to their biography.
 2. The user clicks the “Save Changes” button.
 3. The system prompts the user with an “Are you sure?” message.
 4. The user clicks confirm. 
@@ -78,12 +78,12 @@ Sign Up
 - **Alternate Sequence:**
 1. The user does not make any changes to their profile and clicks “Save Changes”.
 - a.The System displays a “No changes were made” message.
-3. The user clicks no on the prompt.
+2. The user clicks no on the prompt.
 - a.The System displays a “No changes were made” message.
 
 <br>
 
-3. Delete User Profile (Charles)
+### 3. Delete User Profile (Charles)
 - **Pre-condition:** The user has a profile and is logged in.
 - **Trigger:** The user clicks the “delete profile” button in the profile page.
 - **Primary Sequence:**
@@ -99,7 +99,7 @@ Sign Up
 
 <br>
 
-4. Login (CJ)
+### 4. Login (CJ)
 - **Pre-condition:** User must have previously registered an account within the system or application.
 - **Trigger:** User's attempt to access the application or system that requires authentication
 - **Primary Sequence:** 
@@ -119,22 +119,21 @@ Sign Up
 
 <br>
 
-5. Logout (CJ)
+### 5. Logout (CJ)
 - **Pre-condition:** Users must be logged into the application.
-- **Trigger:** The user clicking the logout button.
+- **Trigger:** The user actively selects the "logout" or "sign out" option within the application.
 - **Primary Sequence:** 
-1. The user actively selects the "logout" or "sign out" option within the application.
-2. The system displays a confirmation message to verify the user's intent to log out.
-3. The user clicks confirm.
-4. The system invalidates the user's current session, removing the session token or related authentication information.
-6. After logout, the system redirects the user to the login page.
+1. The system displays a confirmation message to verify the user's intent to log out.
+2. The user clicks confirm.
+3. The system invalidates the user's current session, removing the session token or related authentication information.
+4. After logout, the system redirects the user to the login page.
 - **Primary Postconditions:** 
 - The user is logged out of the system.
 - The user is directed to the login page.
 
 <br>
 
-6. Reset Password (Charles)
+### 6. Reset Password (Charles)
 - **Pre-condition:** User must have an account.
 - **Trigger:** The user clicks on the “Reset password” on the login or profile page.
 - **Primary Sequence:**
@@ -153,13 +152,12 @@ Sign Up
 
 <br>
 
-7. Edit and Save Note(Anthony)
+### 7. Edit and Save Note(Anthony)
 - **Pre-condition:** The user is on one of their note pages.
 - **Trigger:** The user edits the text on the current note. 
 - **Primary Sequence:**
-1. The user edits the text contained in the note.
-2. The user clicks save.
-3. The system updates the user's note.
+1. The user clicks save.
+2. The system updates the user's note.
 - **Primary Postconditions:**
 -  Any changes made to the contents of the note are saved.
 - **Alternate Sequence:**
@@ -168,14 +166,13 @@ Sign Up
 
 <br>
 
-8. Create a Note / Folder (Anthony)
+### 8. Create a Note / Folder (Anthony)
 - **Pre-condition:** The user is on their homepage.
 - **Trigger:** The user clicks the new Note/Folder button.
 - **Primary Sequence:**
-1. The user clicks the new Note/Folder button.
-2. The system prompts the user to enter a name.
-3. The user enters a name and clicks the create button.
-4. The system creates a new Note/Folder and displays it on the homepage.
+1. The system prompts the user to enter a name.
+2. The user enters a name and clicks the create button.
+3. The system creates a new Note/Folder and displays it on the homepage.
 - **Primary Postconditions:**
 -  A new Note/Folder is created with the name the user specified and is available to the user on the homepage. 
 - **Alternate Sequence:**
@@ -185,9 +182,9 @@ Sign Up
 
 <br>
 
-9. Ability to move notes into different folder (Anthony)
+### 9. Ability to move notes into different folder (Anthony)
 - **Pre-condition:** The user is on their homepage.
-- **Trigger:** The user clicks on one or many of their notes and selects the “Move to folder” option.
+- **Trigger:** The user clicks on one or many of their notes and selects the “Move to folder” button.
 - **Primary Sequence:**
 1. The system prompts the user to select which folder they want to move the note(s) to.
 2. The user selects the folder.
@@ -201,7 +198,7 @@ Sign Up
 
 <br>
 
-10. Accessing a password protected folder (Charles)
+### 10. Accessing a password protected folder (Charles)
 - **Pre-condition:** The user needs to be logged in and verified.
 - **Trigger:** The user clicks on the password protected folder button/icon.
 - **Primary Sequence:**
@@ -216,13 +213,12 @@ Sign Up
 
 <br>
 
-11. Advance search items with regular expressions or filters by categories (Thy)
+### 11. Advance search items with regular expressions or filters by categories (Thy)
 - **Pre-condition:** The user is logged into their account
-- **Trigger:** The user click on the search bar
+- **Trigger:** The user enters an expression into the search bar or clicks on the filter icon next to the search bar.
 - **Primary Sequence:**
-1. The user enters an expression into the search bar or clicks on the filter icon next to the search bar.
-2. The system displays a drop down menu if the user clicks on the filter icon.
-3. The system redirects the user to the result page after the user customize their filter or press enter after they have entered some expressions in the search bar.
+1. The system displays a drop down menu if the user clicks on the filter icon.
+2. The system redirects the user to the result page after the user customize their filter or press enter after they have entered some expressions in the search bar.
 - **Primary Postconditions:**
 1. The result page contains notes or folders that fit the user’s search criteria
 - **Alternative Sequence:**
@@ -231,11 +227,11 @@ Sign Up
 
 <br>
 
-12. Opening notes and folders (Charles)
+### 12. Opening notes and folders (Charles)
 - **Pre-condition:** The user is on the homepage and is logged in.
 - **Trigger:** The user double clicks on the specified note or folder icon that they want to edit.
 - **Primary Sequence:**
-1. The system will retrieve the file from the database.
+1. The system will retrieve the specified file.
 2. The system will display that file’s information to the user.
 - a. If it is a note file it will display the text stored
 - b. If it is a folder file it will display files that are stored in that folder.
@@ -244,7 +240,7 @@ Sign Up
 
 <br>  
 
-13. Save notes as txt, docx or pdf (Thy)
+### 13. Save notes as txt, docx or pdf (Thy)
 - **Pre-condition:** The user is open the note they want to save
 - **Trigger:** The user click the “save as” button
 - **Primary Sequence:**
@@ -256,7 +252,7 @@ Sign Up
 
 <br>
 
-14. Delete Notes (CJ)
+### 14. Delete Notes (CJ)
 - **Pre-condition:** The user must be logged into the note-taking application. The user also must have created or have access to the notes they intend to delete.
 - **Trigger:** The user's explicit action or request to remove one or multiple notes from the note-taking application.
 - **Primary Sequence:** 

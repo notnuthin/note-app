@@ -58,4 +58,25 @@
 - Charles will finish requirement #6, resetting password.
 - CJ will work on deleting notes and the ethical implications write-up.
 - Thy will update the README with how to run the project and upload a txt file with all the required libraries.
-- The whole team will work on commenting and documenting their code. 
+- The whole team will work on commenting and documenting their code.
+
+### 2023-11-28 at 10:50
+- Anthony, Charles, CJ, Thy
+- Discussing completing Milestone 2, write-up. Also reviewed and merged Charles's code (20 min)
+- Discussing plans for Milestone 3 and completing the project. Talked about implementing remaining requirements. (30 min)
+- Thy will work on advanced search and starting the multilingual requirement.
+- Charles will work on creating a password protected folder and editing user profiles.
+- CJ will work on finishing delete notes, and may do save notes as pdf, etc. and deleting account
+- Anthony will help Thy with the multilingual requirement and CJ with completing the remaining ones.
+
+### 2023-12-03 at 15:00 
+- Anthony, Charles, CJ
+- Updates from Charles regarding his password protected folder requirement (10 min)
+- Merging the two new features onto main, which were exporting notes and making password protected folders (20 min)
+- Discussed plans to complete milestone 3 (10 min)
+- Trying to fix Flask_Weasyprint (60 min)
+- Fixed password protected folder not showing up on homepage (10 min)
+- Anthony completed exporting notes as pdf, docx, txt.
+- Charles completed password protected folder requirement. 
+- Charles will work on the user profile page and deleting users.
+- The team will meet up after class / in class on Tuesday to create the final project video presentation. 

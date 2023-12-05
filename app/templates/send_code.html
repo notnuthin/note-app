@@ -1,0 +1,13 @@
+{% extends "base.html"%}
+
+{% block content %}
+    <div class = "block_in_middle_of_screen">
+        <h1>Please enter email for verification code.</h1>
+        <form id="" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.email.label }} <br> 
+            {{ form.email() }} <br>
+            {{ form.submit() }}
+        </form>
+    </div>
+{% endblock %}
