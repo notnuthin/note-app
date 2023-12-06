@@ -9,7 +9,7 @@ auth = Blueprint('auth', __name__)
 @auth.route("/login", methods = ['GET', 'POST'])
 def login():
     if current_user.is_authenticated: #user already logged in
-         return redirect('/')
+         return redirect(url_for('main.homepage'))
     form = LoginForm()
     if form.validate_on_submit():
         print("validated")

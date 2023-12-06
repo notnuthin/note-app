@@ -10,19 +10,21 @@ from io import BytesIO
 import random
 import string
 from docx import Document
-from flask_weasyprint import HTML, render_pdf
+#from flask_weasyprint import HTML, render_pdf
 
 main = Blueprint('main', __name__)
 
-@main.route("/")
-@main.route("/index.html")
-@login_required
-def index():
-    notes = current_user.notes.all()
-    return render_template('index.html', notes = notes)
+# @main.route("/")
+# @main.route("/index.html")
+# @login_required
+# def index():
+#     notes = current_user.notes.all()
+#     return render_template('index.html', notes = notes)
 
-@login_required
+
+@main.route("/")
 @main.route("/homepage", methods = ['GET', 'POST'])
+@login_required
 def homepage():
     # Queries the current user's notes and folders to be displayed on the homepage
     folders = current_user.folders.all()

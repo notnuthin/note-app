@@ -43,7 +43,7 @@ app_obj.register_blueprint(main_blueprint)
 
 with app_obj.app_context():
      from app.models import User, Note, Folder
-     db.drop_all() #this command deletes the tables so you can add new ones
+     #db.drop_all() #this command deletes the tables so you can add new ones
      db.create_all()
 
 

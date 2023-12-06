@@ -12,7 +12,7 @@
                     <h1 class = "app_name">EasyNote</h1>
                     </div>
                     <div class = "nav_bar">
-                        <a href="{{ url_for('main.index') }}">Home</a>
+                        <a href="{{ url_for('main.homepage') }}">Home</a>
                         {% if current_user.is_anonymous %}
                         <a href="{{ url_for('auth.login') }}">Login</a>
                         <a href="{{ url_for('auth.signup') }}">Sign Up</a>
