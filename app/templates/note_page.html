@@ -76,7 +76,6 @@
             <label for="dropdown">Select an option:</label>
             <select id="dropdown">
                 <option value="docx">DOCX</option>
-                <option value="pdf">PDF</option>
                 <option value="txt">TXT</option>
             </select>
             <button onclick="submitCustomPrompt()">Export</button>
@@ -133,7 +132,6 @@
 
             // Define MIME types for file types
             const mimeTypes = {
-                'pdf': 'application/pdf',
                 'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 'txt': 'text/plain',
             };
