@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
 
     // Function to handle search
@@ -15,25 +15,25 @@ document.addEventListener("DOMContentLoaded", function() {
                 "Content-Type": "application/json"
             },
         })
-        .then((response) => response.json())
-        .then((data) => {
-            const searchResults = document.getElementById("searchResults");
-            searchResults.innerHTML = ""; // Clear previous results
-            data.results.forEach((result) => {
-                const listItem = document.createElement("li");
-                listItem.textContent = result.name; // Adjust to match your result structure
-                listItem.addEventListener("click", () => {
-                    window.open(result.url) // Open note when clicked
+            .then((response) => response.json())
+            .then((data) => {
+                const searchResults = document.getElementById("searchResults");
+                searchResults.innerHTML = ""; // Clear previous results
+                data.results.forEach((result) => {
+                    const listItem = document.createElement("a");
+                    listItem.textContent = result.name; // Adjust to match your result structure
+                    listItem.addEventListener("click", () => {
+                        window.open(result.url) // Open note when clicked
+                    });
+                    searchResults.appendChild(listItem);
                 });
-                searchResults.appendChild(listItem);
+                if (data.results.length === 0) {
+                    searchResults.innerHTML = "<a>No results found</a>";
+                }
+                document.getElementById("searchDropdown").classList.toggle("show");
+            }).catch((error) => {
+                console.error("Error:", error);
             });
-            if (data.results.length === 0) {
-                searchResults.innerHTML = "<li>No results found</li>";
-            }
-            document.querySelector('.search-dropdown').style.display = 'block'; // Show dropdown
-    })  .catch((error) => {
-            console.error("Error:", error);
-        });
     }
 
     // Event listener for the search button click
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Event listener for "Enter" key press
     var searchInput = document.getElementById("searchInput");
-    searchInput.addEventListener("keypress", function(event) {
+    searchInput.addEventListener("keypress", function (event) {
         if (event.key === 'Enter') {
             Search();
         }
