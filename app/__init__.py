@@ -46,8 +46,6 @@ with app_obj.app_context():
      #db.drop_all() #this command deletes the tables so you can add new ones
      db.create_all()
 
-
-
 login_manager = LoginManager(app_obj)
 login_manager.login_view = 'auth.login'
 

@@ -44,18 +44,23 @@
 
         <div class="icons-container">
             <!-- New Folder Button -->
-            <form onsubmit="return newFolder()">
+            <form class="item" onsubmit="return newFolder()">
                 <button class="transparentbutton" onclick="submit()">
                     <img src="{{url_for('static', filename ='plus.png')}}" alt="Folder Image">
                 </button>
+                <div class="caption">
+                    Create a Folder
+                </div>
             </form>
             <!-- For Loop making an picture button for each folder -->
             {% for folder in folders %}
-            <form onsubmit="return false;">
+            <form class="item" onsubmit="return false;">
                 <button class="transparentbutton folderbutton" id="{{folder.id}}" onclick="openFolder({{folder.id}})">
                     <img src="{{url_for('static', filename ='Foldersmall.png')}}" alt="Folder Image">
                 </button>
-                {{folder.name}}
+                <div class="caption">
+                    {{folder.name}}
+                </div>
             </form>
             {% endfor %}
         </div>
@@ -87,21 +92,25 @@
         <!-- Where all the notes and new note button are contained -->
         <div class="icons-container">
             <!-- New Note button -->
-            <form onsubmit="return newNote()">
+            <form class ="item" onsubmit="return newNote()">
                 <button class="transparentbutton" onclick="submit()">
                     <img src="{{url_for('static', filename ='plus.png')}}" alt="Note Image">
                 </button>
+                <div class="caption">
+                    Create a Note
+                </div>
             </form>
 
             <!-- For loop for displaying each note -->
             {% for note in notes %}
-            {% if note.folder_id is none or not note.folder.is_password_protected%}
-            <form onsubmit="return false;">
-                <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')"
-                    ondblclick="openNote('{{note.id}}')">
-                    <img src="{{url_for('static', filename ='smallNote.jpg')}}" alt="Note Image">
+            {% if note.folder_id is none or not note.folder.is_password_protected%} 
+            <form class="item" onsubmit="return false;">
+                <button class="transparentbutton notebutton" id="{{note.id}}" onclick="toggleSelection('{{note.id}}')" ondblclick="openNote('{{note.id}}')">
+                    <img src="{{url_for('static', filename ='smallNote.jpg')}}"  alt="Note Image">
                 </button>
-                {{note.name}}
+                <div class="caption">
+                    {{note.name}}
+                </div>
             </form>
             {% endif %}
             {% endfor %}
@@ -110,8 +119,11 @@
 
     <!-- Where the notes will be contained when you open a folder, starts invisible -->
     <div id="notesArea" class="invisible">
-        <div id="header2">
-            Notes
+            <div id="header2">
+                Notes
+            </div>
+            <div id="notesContainer" class="icons-container">
+            </div>
         </div>
         <div id="notesContainer" class="icons-container">
             Hahaha
@@ -262,6 +274,7 @@
 
             // Close the popup
             closeCustomPrompt();
+            location.reload();
         }
 
         //Function for making a new folder

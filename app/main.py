@@ -10,7 +10,6 @@ from io import BytesIO
 import random
 import string
 from docx import Document
-#from flask_weasyprint import HTML, render_pdf
 
 main = Blueprint('main', __name__)
 
@@ -249,14 +248,8 @@ def export_notes(output_format):
         if not note_content:
             raise RuntimeError("Empty note content")
 
-        if output_format == 'pdf':
-            # Use WeasyPrint for PDF conversion
-            html_content = f"<pre>{note_content}</pre>"
-            pdf = HTML(string=html_content).write_pdf()
-            response = make_response(pdf)
-            response.headers['Content-Type'] = 'application/pdf'
-            response.headers['Content-Disposition'] = 'attachment; filename=temp_note.pdf'
-        elif output_format == 'docx':
+    
+        if output_format == 'docx':
             # Use python-docx for docx conversion
             doc = Document()
             doc.add_paragraph(note_content)
