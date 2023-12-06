@@ -7,6 +7,7 @@ from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, BadSignature
 from werkzeug.security import generate_password_hash, check_password_hash
 from io import BytesIO
+from werkzeug.security import generate_password_hash, check_password_hash
 import random
 import string
 from docx import Document
@@ -127,12 +128,15 @@ def get_notes(folder_id):
         if folder.is_password_protected:
             # Prompt the user for PIN code
             pin_code = request.args.get('pin_code')
+            
             # Verify the PIN code
             if not pin_code:
                 print("Incorrect PIN code")
                 return jsonify({'error': 'PIN code is required for password-protected folder'}), 403
             hashed_pin_code = generate_password_hash(pin_code)
             print(f"Received PIN code: {pin_code}")
+            print(f"Received pin_code hashed: {hashed_pin_code}")
+            print(f"Stored hashed PIN code: {folder.pin_code}")
             if folder.pin_code is None or not check_password_hash(folder.pin_code, pin_code):
                 print("Incorrect PIN code")
                 return jsonify({'error': 'Incorrect PIN code'}), 403
