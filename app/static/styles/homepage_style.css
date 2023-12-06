@@ -1,10 +1,18 @@
+@font-face { font-family: Qualy; src: url('QualyBold.ttf'); } 
 #appName {
+    color:black;
+    font-family: Qualy;
     padding-top: 0px;
     padding-bottom: 0px;
     padding-left: 0px;
-    font-size: 24pt; 
-    color: #08a3d9; 
     min-width: 150px;
+    font-size: 20px;
+    display: flex;
+}
+#profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #searchBar{
     display: flex;
@@ -42,17 +50,27 @@
 .show {display: block;}
 
 #header{
+    background-color: rgb(20, 148, 161);
     display: flex;
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    margin: 0 1%;
     border-bottom: 1px solid #d3d3d3;
     overflow: no-content;
-    min-width: 400px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: bold;
+    height: 100px;
 }
+
+.header-button{
+    background-color: white; /* Background color */
+    color: black; /* Text color */
+    padding: 5px 5px; /* Padding around the text */
+    text-decoration: none; /* Remove default link underline */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold; /* Text weight */
+}
+
 
 #header2{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -124,6 +142,8 @@ body{
     background-color: #f8f9fa;
     color: #343a40;
     font-family: 'Helvetica', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 .item {
     vertical-align: top;
