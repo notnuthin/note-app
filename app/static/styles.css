@@ -49,6 +49,9 @@ body.signup .background {
 body.login .background {
     background-image: url('../static/img/login.PNG');
 }
+body.reset .background {
+    background-image: url('../static/img/reset.PNG');
+}
 div.block_in_middle_of_screen{
     width: fit-content; /* Set the width to fit the content */
     margin: auto; /* Center the block horizontally */

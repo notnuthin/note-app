@@ -9,10 +9,11 @@
     <!-- The header for the homepage -->
     <div id="header">
         <div id="appName">
-            Easy Notes
+            <img src = "{{ url_for('static', filename='img/logo.PNG') }}" height="80px" width="80px" align = "left"/>
+            <h1 class = "app_name">EasyNote</h1>
         </div>
         <div id="searchBar">
-            <button id="searchButton">search</button>
+            <button id="searchButton"><img src="{{url_for('static', filename ='img/search-icon.png')}}" alt="Search Icon" width="20px" height="20px"></button>
             <div id="searchContainer">
                 <input type="text" id="searchInput" placeholder="Note's name">
                 <div id="searchDropdown" class="search-dropdown">
@@ -30,8 +31,10 @@
             </div>
         </div>
         <div id="profile">
-            <a href="{{ url_for('profile') }}">Your Profile</a>
+            <img src = "{{ url_for('static', filename='img/profile_icon.PNG') }}" height="65px" width="65px"/>
+            <a href="{{ url_for('profile') }}" class = "header-button">Your Profile</a>
         </div>
+        <a href="{{ url_for('auth.logout') }}" class = "header-button">Logout</a>
     </div>
     <!-- The main section of the page which includes the folders and notes -->
     <div id="mainPage">
