@@ -28,6 +28,8 @@ https://drive.google.com/file/d/1N8cH1uME5ayGHSQ4vbdXm0CE5Kjn0n2D/view?usp=shari
 4. Start creating notes and folders to store them!
    <img width="1280" alt="homepage" src="https://github.com/notnuthin/note-app/assets/96977067/455fc697-93d5-4752-b6dc-e1aa7ecdfa2f">
 
+Note: When you create folders, create notes, or move notes to folders you may need to refresh the page to see the homepage update. 
+
 # Completed Functional Requirements
 1. Sign Up (Thy)
 2. Exit User Profile (Charles)
