@@ -162,12 +162,14 @@ def search():
     results = []
     search_expression = request.args.get('search_expression')
     filter = request.args.get('folder')
-    print(search_expression)
-    print(filter)
+    print("search expression:" + search_expression)
+    print("filter: " + filter)
     if filter == "All folders":
         notes = Note.query.filter_by(name = search_expression).all()
     else:
-        notes = Note.query.filter_by(name=search_expression, id =filter).all()
+        notes = Note.query.filter_by(name=search_expression, folder_id = filter).all()
+    
+    print(notes)
     if notes is None:
         return {"result": None}
     else:
