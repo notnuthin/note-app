@@ -80,3 +80,10 @@
 - Charles completed password protected folder requirement. 
 - Charles will work on the user profile page and deleting users.
 - The team will meet up after class / in class on Tuesday to create the final project video presentation. 
+
+### 2023-12-06 at 11:00 
+- Anthony, Charles, CJ, Thy
+- We ironed out any last bugs we saw with the code, updated the CSS, updated the ReadMe, and added a logout button to profile. (60 min)
+- Then we worked on recording the video for the final milestone submission. (60 min)
+- There was a bug with search though, so Thy will work on that and record a demonstration of it.
+- Anthony will work on editing the two videos together for a final video. 
