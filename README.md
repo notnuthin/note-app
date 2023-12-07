@@ -4,6 +4,9 @@
 - Gia Thy Le (@shinychikapu)
 - Chiekezie Ezenekwe (@Chiekezie)
 
+# Project Demo
+https://drive.google.com/file/d/1N8cH1uME5ayGHSQ4vbdXm0CE5Kjn0n2D/view?usp=sharing
+
 # How to set up and run the project
 1. Create an virtual environemnt and download the libraries requirement to your virtual environment by running the command below in the terminal
    
