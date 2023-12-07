@@ -1,4 +1,4 @@
-@font-face { font-family: Qualy; src: url('QualyBold.ttf'); } 
+@font-face { font-family: Qualy; src: url('../QualyBold.ttf'); } 
 #appName {
     color:black;
     font-family: Qualy;

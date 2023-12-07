@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("search triggered");
         var query = document.getElementById("searchInput").value;
         var filter = document.getElementById("filter-dropdown").value;
-        console.log(filter)
+        console.log("query:" + query);
+        console.log("filter" + filter);
         // Append the query to the URL as a parameter
         var url = '/search?search_expression=' + encodeURIComponent(query) + '&folder=' + encodeURIComponent(filter)
         fetch(url, {
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const searchResults = document.getElementById("searchResults");
                 searchResults.innerHTML = ""; // Clear previous results
                 data.results.forEach((result) => {
+                    console.log("data received: " + result)
                     const listItem = document.createElement("a");
                     listItem.textContent = result.name; // Adjust to match your result structure
                     listItem.addEventListener("click", () => {
@@ -46,5 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.key === 'Enter') {
             Search();
         }
+        
+    });
+    searchInput.addEventListener("keyup", function () {
+        var searchDropdown = document.getElementById("searchDropdown");
+        searchDropdown.classList.remove("show");
     });
 });
